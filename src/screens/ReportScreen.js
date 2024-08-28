@@ -2,9 +2,9 @@ import { Image, ImageBackground, StyleSheet, Text, TextInput, View } from 'react
 import backgroundImage from '../assets/images/bg.jpg';
 import logoImage from '../assets/images/logo.png'
 import { useState } from 'react';
-import LeagueTable from '../components/LeagueTable';
+import ReportTable from '../components/ReportTable';
 
-const LeagueScreen = ({ navigation }) => {
+const ReportScreen = ({ navigation }) => {
     const [search, setSearch] = useState('');
 
     return (
@@ -13,7 +13,7 @@ const LeagueScreen = ({ navigation }) => {
                 <Image source={logoImage} style={styles.logo} />
                 <View style={styles.tableBg}>
                     <Text style={styles.title}>
-                        Your Leagues
+                        Manage Reports
                     </Text>
                     <View style={styles.table}>
                         <TextInput
@@ -22,7 +22,7 @@ const LeagueScreen = ({ navigation }) => {
                             onChangeText={setSearch}
                             style={styles.input}
                         />
-                        <LeagueTable />
+                        <ReportTable />
                     </View>
                 </View>
             </View>
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LeagueScreen;
+export default ReportScreen;
