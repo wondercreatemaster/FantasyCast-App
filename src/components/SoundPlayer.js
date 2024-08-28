@@ -13,7 +13,7 @@ const SoundPlayer = ({ sound }) => {
                 minimumTrackTintColor="#e75480"
                 maximumTrackTintColor="#d3d3d3"
                 thumbTintColor="#e75480"
-                value={0}
+                value={50}
                 style={styles.slider}
             />
 
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         elevation: 5
     },
     slider: {
-        width: "auto"
+        width: "60%"
     }
 })
 

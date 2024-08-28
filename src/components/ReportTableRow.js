@@ -117,40 +117,37 @@ const ReportTableRow = () => {
                         <SoundPlayer />
                         <View style={styles.checkboxlist}>
                             <CheckBox
-                                style={styles.checkbox}
                                 checkedIcon={<Text style={styles.checked}>Sun</Text>}
                                 uncheckedIcon={<Text style={styles.unchecked}>Sun</Text>}
                             />
                             <CheckBox
-                                disabled
-                                style={styles.checkbox}
-                                checkedIcon={<Text style={styles.checked}>Sun</Text>}
-                                uncheckedIcon={<Text style={styles.unchecked}>Sun</Text>}
+                                checkedIcon={<Text style={styles.checked}>Mon</Text>}
+                                uncheckedIcon={<Text style={styles.unchecked}>Mon</Text>}
                             />
                             <CheckBox
                                 disabled
-                                checkedIcon={<Text style={styles.checked}>Sun</Text>}
-                                uncheckedIcon={<Text style={styles.unchecked}>Sun</Text>}
+                                checkedIcon={<Text style={styles.checked}>Tue</Text>}
+                                uncheckedIcon={<Text style={styles.unchecked}>Tue</Text>}
                             />
                             <CheckBox
                                 disabled
-                                checkedIcon={<Text style={styles.checked}>Sun</Text>}
-                                uncheckedIcon={<Text style={styles.unchecked}>Sun</Text>}
+                                checkedIcon={<Text style={styles.checked}>Wed</Text>}
+                                uncheckedIcon={<Text style={styles.unchecked}>Wed</Text>}
                             />
                             <CheckBox
                                 disabled
-                                checkedIcon={<Text style={styles.checked}>Sun</Text>}
-                                uncheckedIcon={<Text style={styles.unchecked}>Sun</Text>}
+                                checkedIcon={<Text style={styles.checked}>Thu</Text>}
+                                uncheckedIcon={<Text style={styles.unchecked}>Thu</Text>}
                             />
                             <CheckBox
                                 disabled
-                                checkedIcon={<Text style={styles.checked}>Sun</Text>}
-                                uncheckedIcon={<Text style={styles.unchecked}>Sun</Text>}
+                                checkedIcon={<Text style={styles.checked}>Fri</Text>}
+                                uncheckedIcon={<Text style={styles.unchecked}>Fri</Text>}
                             />
                             <CheckBox
                                 disabled
-                                checkedIcon={<Text style={styles.checked}>Sun</Text>}
-                                uncheckedIcon={<Text style={styles.unchecked}>Sun</Text>}
+                                checkedIcon={<Text style={styles.checked}>Sat</Text>}
+                                uncheckedIcon={<Text style={styles.unchecked}>Sat</Text>}
                             />
                         </View>
                     </Dialog.Content>
@@ -179,32 +176,41 @@ const styles = StyleSheet.create({
     },
     checked: {
         borderColor: "#2222ff",
-        borderRadius: 30,
-        padding: 10,
+        borderRadius: 50,
+        paddingVertical: 10,
         borderWidth: 1,
         backgroundColor: "#2222ff",
-        color: "white"
+        color: "white",
+        marginLeft: -33,
+        width: 40,
+        textAlign: "center",
     },
     unchecked: {
         borderColor: "#2222ff",
-        borderRadius: 30,
-        padding: 10,
-        borderWidth: 1
+        borderRadius: 50,
+        paddingVertical: 10,
+        borderWidth: 1,
+        marginLeft: -33,
+        textAlign: "center",
+        width: 40,
+        fontSize: 10
     },
     disabled: {
         borderColor: "#2222ff",
-        borderRadius: 30,
-        padding: 10,
+        borderRadius: 50,
+        paddingVertical: 10,
         borderWidth: 1,
-        color: "#555555"
+        color: "#555555",
+        textAlign: "center",
+        marginLeft: -33,
+        width: 40
     },
     checkboxlist: {
         flex: 0,
+        width: 40,
+        gap: 10,
         flexDirection: "row",
     },
-    checkbox: {
-        marginLeft: -100
-    }
 })
 
 export default ReportTableRow;

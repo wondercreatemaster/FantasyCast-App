@@ -1,4 +1,4 @@
-import { Image, ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Button, Image, ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
 import backgroundImage from '../assets/images/bg.jpg';
 import logoImage from '../assets/images/logo.png'
 import { useState } from 'react';
@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
     logo: {
         width: "20%",
         height: "8%",
-        resizeMode: "contain"
+        resizeMode: "contain",
+        marginVertical: 10
     },
     image: {
         flex: 1,
