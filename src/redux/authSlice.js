@@ -1,4 +1,3 @@
-// src/redux/authSlice.js
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 

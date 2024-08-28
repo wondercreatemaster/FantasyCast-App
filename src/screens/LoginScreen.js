@@ -11,9 +11,8 @@ const LoginScreen = ({ navigation }) => {
     const dispatch = useDispatch();
 
     const handleLogin = () => {
-        // Call your API for login here
-        // On success:
         dispatch(login({ email }));
+        navigation.replace('League');
     };
 
     return (
@@ -72,6 +71,8 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 40,
+        backgroundColor: 'white',
+        borderRadius: 5,
         borderColor: 'gray',
         borderWidth: 1,
         marginBottom: 12,
