@@ -33,22 +33,22 @@ const LeagueTableRow = () => {
 
     return (
         <DataTable.Row className="h-20">
-            <DataTable.Cell>
+            <DataTable.Cell style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
                 <Text className="text-center">
                     League of Thrones
                 </Text>
             </DataTable.Cell>
-            <DataTable.Cell>
+            <DataTable.Cell style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
                 <Text className="text-center">
                     2024
                 </Text>
             </DataTable.Cell>
-            <DataTable.Cell onPress={ReportPress}>
+            <DataTable.Cell onPress={ReportPress} style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
                 <Text className="text-center text-blue-500">
                     Manage Reports
                 </Text>
             </DataTable.Cell>
-            <DataTable.Cell onPress={showDialog}>
+            <DataTable.Cell onPress={showDialog} style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
                 <Text className="text-center text-blue-500">
                     Your SideLine Snippets
                 </Text>
