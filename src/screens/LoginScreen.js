@@ -4,7 +4,7 @@ import { View, TextInput, Button, StyleSheet, ImageBackground, Text } from 'reac
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/authSlice';
 import backgroundImage from '../assets/images/bg.jpg';
-import * as SecureStore from 'react-native-keychain'
+import * as keychain from 'react-native-keychain'
 import { Alert } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
@@ -20,20 +20,17 @@ const LoginScreen = ({ navigation }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: { sleeperId, password }
+                body: JSON.stringify({ sleeperId, password })
             });
 
-            // if (response.status !== 200) {
-            //     throw new Error('Login failed!');
-            // }
+            if (response.status !== 200) {
+                throw new Error('Login failed!');
+            }
 
             const data = await response.json();
             const { token } = data; // Assuming your server responds with a token
 
-            // Store the token securely
-            await SecureStore.setItemAsync('userToken', token);
-            Alert.alert('Login successful!');
-            dispatch(login({ sleeperId }));
+            dispatch(login({ sleeperId, token }));
             navigation.replace('League');
             // Navigate to the next screen or perform other actions
         } catch (error) {
