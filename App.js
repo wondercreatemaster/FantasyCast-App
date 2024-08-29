@@ -4,13 +4,16 @@ import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import Navigation from './src/navigation/Navigation';
 import { PaperProvider } from 'react-native-paper';
+import { AxiosProvider } from './src/contexts/AxiosContext';
 
 export default function App() {
   return (
     <Provider store={store}>
-      <PaperProvider>
-        <Navigation />
-      </PaperProvider>
+      <AxiosProvider>
+        <PaperProvider>
+          <Navigation />
+        </PaperProvider>
+      </AxiosProvider>
     </Provider>
   );
 }

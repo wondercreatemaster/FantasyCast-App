@@ -4,15 +4,43 @@ import { View, TextInput, Button, StyleSheet, ImageBackground, Text } from 'reac
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/authSlice';
 import backgroundImage from '../assets/images/bg.jpg';
+import * as SecureStore from 'react-native-keychain'
+import { Alert } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
-    const [email, setEmail] = useState('');
+    const [sleeperId, setSleeperId] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
 
-    const handleLogin = () => {
-        dispatch(login({ email }));
-        navigation.replace('League');
+    const handleLogin = async () => {
+
+        try {
+            const response = await fetch('https://fantasycastcentral.com/api/user/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: { sleeperId, password }
+            });
+
+            // if (response.status !== 200) {
+            //     throw new Error('Login failed!');
+            // }
+
+            const data = await response.json();
+            const { token } = data; // Assuming your server responds with a token
+
+            // Store the token securely
+            await SecureStore.setItemAsync('userToken', token);
+            Alert.alert('Login successful!');
+            dispatch(login({ sleeperId }));
+            navigation.replace('League');
+            // Navigate to the next screen or perform other actions
+        } catch (error) {
+            Alert.alert('Error', error.message);
+        }
+
+
     };
 
     return (
@@ -21,9 +49,9 @@ const LoginScreen = ({ navigation }) => {
                 <View style={styles.form}>
                     <Text style={styles.title}>Login</Text>
                     <TextInput
-                        placeholder="Email"
-                        value={email}
-                        onChangeText={setEmail}
+                        placeholder="Sleeper ID"
+                        value={sleeperId}
+                        onChangeText={setSleeperId}
                         style={styles.input}
                     />
                     <TextInput
@@ -33,9 +61,9 @@ const LoginScreen = ({ navigation }) => {
                         secureTextEntry
                         style={styles.input}
                     />
-                    <Text style={{color: "rgb(54, 131, 220)"}}>Forgot Password?</Text>
+                    <Text style={{ color: "rgb(54, 131, 220)" }}>Forgot Password?</Text>
                     <Button title="Login" onPress={handleLogin} />
-                    <Text style={{color: "white", alignSelf: "center"}}>Don't you have account? Sign up here</Text>
+                    <Text style={{ color: "white", alignSelf: "center" }}>Don't you have account? Sign up here</Text>
                     <Button title="Go to Signup" onPress={() => navigation.navigate('Signup')} />
                 </View>
             </View>
