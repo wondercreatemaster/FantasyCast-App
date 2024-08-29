@@ -3,7 +3,7 @@ import { Button, DataTable } from 'react-native-paper';
 import { StyleSheet, Text } from 'react-native';
 import LeagueTableRow from './LeagueTableRow';
 
-const LeagueTable = () => {
+const LeagueTable = ({ leagues }) => {
     return (
         <DataTable>
             <DataTable.Header className="border-b-1 border-inherit">
@@ -12,7 +12,9 @@ const LeagueTable = () => {
                 <DataTable.Title style={styles.header}>Manage</DataTable.Title>
                 <DataTable.Title style={styles.header}>Feedback</DataTable.Title>
             </DataTable.Header>
-            <LeagueTableRow />
+            {
+                leagues.map(league => <LeagueTableRow key={league.name} league={league} />)
+            }
         </DataTable>
     );
 };

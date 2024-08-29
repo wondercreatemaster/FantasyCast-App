@@ -1,11 +1,32 @@
-import { Button, Image, ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, Button, Image, ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
 import backgroundImage from '../assets/images/bg.jpg';
 import logoImage from '../assets/images/logo.png'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LeagueTable from '../components/LeagueTable';
+import { useSelector } from 'react-redux';
 
 const LeagueScreen = ({ navigation }) => {
     const [search, setSearch] = useState('');
+    const [leagues, setLeagues] = useState([]);
+
+    const auth = useSelector(state => state.auth);
+    useEffect(() => {
+        fetch(
+            "https://fantasycastcentral.com/api/user/league/list", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Auth-Token': auth.token
+            },
+        })
+            .then(
+                response => {
+                    response.json().then(
+                        data => setLeagues(data.data)
+                    )
+                }
+            )
+    }, [auth])
 
     return (
         <ImageBackground source={backgroundImage} style={styles.image}>
@@ -22,7 +43,7 @@ const LeagueScreen = ({ navigation }) => {
                             onChangeText={setSearch}
                             style={styles.input}
                         />
-                        <LeagueTable />
+                        <LeagueTable leagues={leagues} />
                     </View>
                 </View>
             </View>

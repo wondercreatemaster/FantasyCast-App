@@ -16,7 +16,7 @@ const weeks = [
     { label: 'week3', value: "Week3" },
 ]
 
-const LeagueTableRow = () => {
+const LeagueTableRow = ({ league }) => {
     const navigation = useNavigation();
     const [visible, setVisible] = useState(false);
 
@@ -35,12 +35,12 @@ const LeagueTableRow = () => {
         <DataTable.Row className="h-20">
             <DataTable.Cell style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
                 <Text className="text-center">
-                    League of Thrones
+                    {league.name}
                 </Text>
             </DataTable.Cell>
             <DataTable.Cell style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
                 <Text className="text-center">
-                    2024
+                    {league.season}
                 </Text>
             </DataTable.Cell>
             <DataTable.Cell onPress={ReportPress} style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>

@@ -30,8 +30,8 @@ const LoginScreen = ({ navigation }) => {
             const data = await response.json();
             const { token } = data; // Assuming your server responds with a token
 
-            dispatch(login({ sleeperId, token }));
-            navigation.replace('League');
+            dispatch(login(sleeperId, token));
+            navigation.navigate('League');
             // Navigate to the next screen or perform other actions
         } catch (error) {
             Alert.alert('Error', error.message);
