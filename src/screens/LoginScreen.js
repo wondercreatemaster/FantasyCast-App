@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../redux/authSlice';
 import backgroundImage from '../assets/images/bg.jpg';
 import { Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({ navigation }) => {
     const [sleeperId, setSleeperId] = useState('');
@@ -29,7 +30,8 @@ const LoginScreen = ({ navigation }) => {
             const data = await response.json();
             const { token } = data; // Assuming your server responds with a token
 
-            dispatch(login(sleeperId, token));
+            await AsyncStorage.setItem('token', token);
+            dispatch(login(sleeperId));
             navigation.navigate('League');
             // Navigate to the next screen or perform other actions
         } catch (error) {

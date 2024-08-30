@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Button, DataTable, Dialog, Divider, Portal, TextInput } from 'react-native-paper';
-import { Text } from 'react-native';
+import { Alert, Text } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useNavigation } from '@react-navigation/native';
-
-const teams = [
-    { label: 'team1', value: 'Team1' },
-    { label: 'team2', value: 'Team2' },
-    { label: 'team3', value: 'Team3' },
-]
-
-const weeks = [
-    { label: 'week1', value: "Week1" },
-    { label: 'week2', value: "Week2" },
-    { label: 'week3', value: "Week3" },
-]
+import fetchWithToken from '../utils/fetchWithToken';
 
 const LeagueTableRow = ({ league }) => {
     const navigation = useNavigation();
     const [visible, setVisible] = useState(false);
+
+    const [nowWeek, setNowWeek] = useState(1)
+    const weeks = useMemo(() => {
+        const save = [];
+        for (let i = 1; i <= nowWeek; i++) {
+            save.push({ label: i.toString(), value: i.toString() });
+        }
+        return save;
+    }, [nowWeek]);
+
 
     const showDialog = () => setVisible(true);
 
@@ -29,7 +28,56 @@ const LeagueTableRow = ({ league }) => {
 
     const [feedback, setFeedback] = useState('')
 
+    const [feedbacks, setFeedbacks] = useState([]);
+    const [teams, setTeams] = useState([]);
+
     const ReportPress = () => navigation.navigate("Report");
+
+    const fetchFeedback = async () => {
+        const response = await fetchWithToken(
+            `https://fantasycastcentral.com/api/user/feedback/list?league=${league.league_id}`,
+            {
+                method: "GET"
+            }
+        );
+        const data = await response.json();
+        return data.data;
+    }
+
+    const fetchTeam = async () => {
+        const response = await fetchWithToken(
+            'https://fantasycastcentral.com/api/user/report/team/list',
+            {
+                method: "POST",
+                body: JSON.stringify({ league: league.league_id })
+            }
+        );
+        const data = await response.json();
+        return data;
+    }
+
+    useEffect(() => {
+        (async () => {
+            const teamData = await fetchTeam();
+            let teamList = Object.entries(teamData.list);
+
+            const feedbackData = await fetchFeedback();
+            setFeedbacks(feedbackData);
+            setNowWeek(teamData.week);
+            setTeams(teamList.map(item => {
+                return { value: item[0], label: item[1] }
+            }))
+        })()
+    }, [])
+
+    useEffect(() => {
+        let selectedTeam = teams.filter(item => item.value == team)[0];
+        let result = feedbacks?.filter(item => item.league_id === league.league_id && item.week == week && selectedTeam?.label == item.target_team)[0];
+
+        if (result && result.comment)
+            setFeedback(result.comment)
+        else setFeedback("")
+    }, [team, week])
 
     return (
         <DataTable.Row className="h-20">
