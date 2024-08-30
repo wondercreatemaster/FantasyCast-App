@@ -26,7 +26,9 @@ const LeagueTableRow = ({ league }) => {
     const [team, setTeam] = useState(null)
     const [week, setWeek] = useState(null)
 
-    const [feedback, setFeedback] = useState('')
+    const [comment, setComment] = useState('')
+
+    const [feedback, setFeedback] = useState({});
 
     const [feedbacks, setFeedbacks] = useState([]);
     const [teams, setTeams] = useState([]);
@@ -75,9 +77,38 @@ const LeagueTableRow = ({ league }) => {
         let result = feedbacks?.filter(item => item.league_id === league.league_id && item.week == week && selectedTeam?.label == item.target_team)[0];
 
         if (result && result.comment)
-            setFeedback(result.comment)
-        else setFeedback("")
+            setComment(result.comment)
+        else setComment("")
+
+        setFeedback(result)
     }, [team, week])
+
+    handleFeedback = async () => {
+        const response = await fetchWithToken(
+            "https://fantasycastcentral.com/api/user/feedback/update",
+            {
+                method: "POST",
+                body: JSON.stringify({
+                    id: feedback?._id,
+                    league: league.league_id,
+                    week: week,
+                    target_team: team,
+                    comment
+                })
+            }
+        )
+
+        const result = await response.json();
+        setFeedback(result.data);
+
+        const feedbackExist = feedbacks.some(item => item._id === result.data._id);
+        if (feedbackExist) {
+            setFeedbacks(prev => prev?.map(feed => feed._id === result.data._id ? result.data : feed))
+        }
+        else {
+            setFeedbacks(prev => [...prev, result.data])
+        }
+    }
 
     return (
         <DataTable.Row className="h-20">
@@ -128,12 +159,12 @@ const LeagueTableRow = ({ league }) => {
                         <TextInput
                             placeholder='Feedback'
                             multiline
-                            value={feedback}
-                            onChangeText={text => setFeedback(text)}
+                            value={comment}
+                            onChangeText={text => setComment(text)}
                         />
                     </Dialog.Content>
                     <Dialog.Actions>
-                        <Button>Save</Button>
+                        <Button onPress={handleFeedback}>Save</Button>
                     </Dialog.Actions>
                 </Dialog>
             </Portal>
