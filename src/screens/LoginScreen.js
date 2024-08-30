@@ -4,7 +4,6 @@ import { View, TextInput, Button, StyleSheet, ImageBackground, Text } from 'reac
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/authSlice';
 import backgroundImage from '../assets/images/bg.jpg';
-import * as keychain from 'react-native-keychain'
 import { Alert } from 'react-native';
 
 const LoginScreen = ({ navigation }) => {
@@ -60,8 +59,8 @@ const LoginScreen = ({ navigation }) => {
                     />
                     <Text style={{ color: "rgb(54, 131, 220)" }}>Forgot Password?</Text>
                     <Button title="Login" onPress={handleLogin} />
-                    <Text style={{ color: "white", alignSelf: "center" }}>Don't you have account? Sign up here</Text>
-                    <Button title="Go to Signup" onPress={() => navigation.navigate('Signup')} />
+                    <Text style={{ color: "white", alignSelf: "center" }}>Don't you have account?</Text>
+                    <Button title="Signup" onPress={() => navigation.navigate('Signup')} />
                 </View>
             </View>
         </ImageBackground>
