@@ -19,7 +19,7 @@ const types = [
     { label: 'type3', value: "Type3" },
 ]
 
-const ReportTableRow = () => {
+const ReportTableRow = ({ report }) => {
     const navigation = useNavigation();
 
     const [runnowDlg, setRunnowDlg] = useState(false);
@@ -42,10 +42,10 @@ const ReportTableRow = () => {
         <DataTable.Row className="h-[150] gap-2">
             <DataTable.Cell style={styles.cell}>
                 <Text className="text-center text-base">
-                    Upcoming Matchup Insights
+                    {report.description}
                     {'\n'}
                     <Text className="text-sm">
-                        Pre-Matchup Analysis Report
+                        {report.name}
                     </Text>
                 </Text>
             </DataTable.Cell>
@@ -61,7 +61,7 @@ const ReportTableRow = () => {
             </DataTable.Cell>
             <Portal>
                 <Dialog visible={runnowDlg} onDismiss={hideRunnow} className="rounded-md bg-white">
-                    <Dialog.Title>Pre-Matchup Analysis Report</Dialog.Title>
+                    <Dialog.Title>{report.name}</Dialog.Title>
                     <Dialog.Content className="gap-2">
                         <Dropdown
                             className="rounded-md p-2 border-2 border-slate-300"
@@ -102,7 +102,7 @@ const ReportTableRow = () => {
                 </Dialog>
 
                 <Dialog visible={scheduleDlg} onDismiss={hideSchedule} className="rounded-md bg-white">
-                    <Dialog.Title>Pre-Matchup Analysis Report</Dialog.Title>
+                    <Dialog.Title>{report.name}</Dialog.Title>
                     <Dialog.Content className="gap-2">
                         <Dropdown
                             className="rounded-md p-2 border-2 border-slate-300"
@@ -181,7 +181,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         backgroundColor: "#2222ff",
         color: "white",
-        marginLeft: -33,
         width: 40,
         textAlign: "center",
     },
@@ -190,7 +189,6 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         paddingVertical: 10,
         borderWidth: 1,
-        marginLeft: -33,
         textAlign: "center",
         width: 40,
         fontSize: 10
@@ -202,7 +200,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         color: "#555555",
         textAlign: "center",
-        marginLeft: -33,
         width: 40
     },
     checkboxlist: {

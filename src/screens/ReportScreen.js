@@ -1,11 +1,28 @@
-import { Image, ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, ImageBackground, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import backgroundImage from '../assets/images/bg.jpg';
 import logoImage from '../assets/images/logo.png'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ReportTable from '../components/ReportTable';
+import fetchWithToken from '../utils/fetchWithToken';
 
 const ReportScreen = ({ navigation }) => {
     const [search, setSearch] = useState('');
+
+    const [reports, setReports] = useState([]);
+
+    useEffect(() => {
+        fetchWithToken(
+            "https://fantasycastcentral.com/api/user/report/list",
+            {
+                method: "GET"
+            }
+        )
+            .then(response => {
+                response.json().then(
+                    data => setReports(data.data)
+                )
+            })
+    }, [])
 
     return (
         <ImageBackground source={backgroundImage} style={styles.image}>
@@ -22,7 +39,9 @@ const ReportScreen = ({ navigation }) => {
                             onChangeText={setSearch}
                             style={styles.input}
                         />
-                        <ReportTable />
+                        <ScrollView style={{ height: "80%" }}>
+                            <ReportTable reports={reports} />
+                        </ScrollView>
                     </View>
                 </View>
             </View>
