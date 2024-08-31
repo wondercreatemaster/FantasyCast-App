@@ -39,7 +39,7 @@ const ReportScreen = ({ navigation }) => {
                             onChangeText={setSearch}
                             style={styles.input}
                         />
-                        <ScrollView style={{ height: "80%" }}>
+                        <ScrollView style={{ maxHeight: "80%" }}>
                             <ReportTable reports={reports} />
                         </ScrollView>
                     </View>

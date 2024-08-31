@@ -1,17 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, DataTable, Dialog, Divider, Portal, TextInput } from 'react-native-paper';
 import { StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from "react-native-vector-icons"
 import SoundPlayer from './SoundPlayer';
-import { CheckBox } from 'react-native-elements';
+import { CheckBox } from '@rneui/base';
+import fetchWithToken from '../utils/fetchWithToken';
 
-const audios = [
-    { label: 'audio1', value: 'Audio1' },
-    { label: 'audio2', value: 'Audio2' },
-    { label: 'audio3', value: 'Audio3' },
-]
 
 const types = [
     { label: 'type1', value: "Type1" },
@@ -21,6 +17,31 @@ const types = [
 
 const ReportTableRow = ({ report }) => {
     const navigation = useNavigation();
+
+    const [voices, setVoices] = useState([]);
+    const [voicelist, setVoicelist] = useState([]);
+    const [voice, setVoice] = useState(null)
+
+    useEffect(() => {
+        fetchWithToken(
+            "https://fantasycastcentral.com/api/user/reportlog/voice/list",
+            {
+                method: "GET"
+            }
+        )
+            .then(async response => {
+                const data = await response.json();
+                setVoices(data.data);
+                let save = data.data?.map(item => {
+                    return {
+                        value: item['voice_id'],
+                        label: item['name'],
+                        audioURL: item['preview_url']
+                    }
+                })
+                setVoicelist([...save])
+            })
+    }, [])
 
     const [runnowDlg, setRunnowDlg] = useState(false);
     const [scheduleDlg, setScheduleDlg] = useState(false);
@@ -33,7 +54,6 @@ const ReportTableRow = ({ report }) => {
 
     const hideSchedule = () => setScheduleDlg(false);
 
-    const [audio, setAudio] = useState(null)
     const [type, setType] = useState(null)
 
     const [email, setEmail] = useState('')
@@ -65,12 +85,12 @@ const ReportTableRow = ({ report }) => {
                     <Dialog.Content className="gap-2">
                         <Dropdown
                             className="rounded-md p-2 border-2 border-slate-300"
-                            data={audios}
+                            data={voicelist}
                             labelField="label"
                             valueField="value"
                             placeholder="Audio"
-                            value={audio}
-                            onChange={item => setAudio(item.value)}
+                            value={voice}
+                            onChange={item => setVoicelist(item.value)}
                         />
 
                         <SoundPlayer />
@@ -106,17 +126,18 @@ const ReportTableRow = ({ report }) => {
                     <Dialog.Content className="gap-2">
                         <Dropdown
                             className="rounded-md p-2 border-2 border-slate-300"
-                            data={audios}
+                            data={voicelist}
                             labelField="label"
                             valueField="value"
                             placeholder="Audio"
-                            value={audio}
-                            onChange={item => setAudio(item.value)}
+                            value={voice}
+                            onChange={item => setVoice(item.value)}
                         />
 
                         <SoundPlayer />
                         <View style={styles.checkboxlist}>
                             <CheckBox
+                                disabled
                                 checkedIcon={<Text style={styles.checked}>Sun</Text>}
                                 uncheckedIcon={<Text style={styles.unchecked}>Sun</Text>}
                             />
@@ -183,6 +204,7 @@ const styles = StyleSheet.create({
         color: "white",
         width: 40,
         textAlign: "center",
+        fontSize: 10
     },
     unchecked: {
         borderColor: "#2222ff",
@@ -194,13 +216,14 @@ const styles = StyleSheet.create({
         fontSize: 10
     },
     disabled: {
-        borderColor: "#2222ff",
+        borderColor: "#999999",
+        color: "#999999",
         borderRadius: 50,
         paddingVertical: 10,
         borderWidth: 1,
-        color: "#555555",
         textAlign: "center",
-        width: 40
+        width: 40,
+        fontSize: 10
     },
     checkboxlist: {
         flex: 0,
