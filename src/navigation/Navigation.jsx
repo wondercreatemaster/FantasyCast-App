@@ -8,6 +8,7 @@ import LeagueScreen from '../screens/LeagueScreen';
 import ReportScreen from '../screens/ReportScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import { useSelector } from 'react-redux';
+import ReportLogScreen from '../screens/ReportLogScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -22,6 +23,7 @@ const Navigation = () => {
                             <Stack.Screen name="League" component={LeagueScreen} options={{ headerShown: false }} />
                             <Stack.Screen name="Report" component={ReportScreen} options={{ headerShown: false }} />
                             <Stack.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
+                            <Stack.Screen name="ReportLog" component={ReportLogScreen} options={{ headerShown: false }} />
                         </>
                         :
                         <>

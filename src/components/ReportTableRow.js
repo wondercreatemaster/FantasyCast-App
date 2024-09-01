@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Button, DataTable, Dialog, Divider, Portal, TextInput } from 'react-native-paper';
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from "react-native-vector-icons"
 import SoundPlayer from './SoundPlayer';
-import { CheckBox } from '@rneui/base';
+import { CheckBox } from '@rneui/themed';
 import fetchWithToken from '../utils/fetchWithToken';
 
 
@@ -14,12 +14,39 @@ const types = [
     { label: 'Text & Audio', value: "2" },
 ]
 
-const ReportTableRow = ({ report }) => {
+const days = [
+    "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
+]
+
+const ReportTableRow = ({ report, scheduled }) => {
     const navigation = useNavigation();
 
     const [voices, setVoices] = useState([]);
     const [voicelist, setVoicelist] = useState([]);
     const [voice, setVoice] = useState(null)
+
+    const [schedulelist, setSchedulelist] = useState(report.schedule_list);
+
+    const [scheduleState, setScheduleState] = useState(
+        Array(7).fill(false)
+    )
+
+    const handleCheckbox = (index) => {
+        Alert.alert(index);
+        // let save = scheduleState;
+        // save[index] = !save[index];
+        // setScheduleState([...save]);
+    }
+
+    useEffect(() => {
+        if (scheduled != undefined)
+            setScheduleState(
+                Array(7)
+                    .fill(false)
+                    .map(
+                        (_, index) => scheduled.some(item => item == index))
+            );
+    }, [scheduled])
 
     useEffect(() => {
         fetchWithToken(
@@ -135,40 +162,28 @@ const ReportTableRow = ({ report }) => {
 
                         <SoundPlayer />
                         <View style={styles.checkboxlist}>
-                            <CheckBox
-                                disabled
-                                checkedIcon={<Text style={styles.checked}>Sun</Text>}
-                                uncheckedIcon={<Text style={styles.unchecked}>Sun</Text>}
-                            />
-                            <CheckBox
-                                checkedIcon={<Text style={styles.checked}>Mon</Text>}
-                                uncheckedIcon={<Text style={styles.unchecked}>Mon</Text>}
-                            />
-                            <CheckBox
-                                disabled
-                                checkedIcon={<Text style={styles.checked}>Tue</Text>}
-                                uncheckedIcon={<Text style={styles.unchecked}>Tue</Text>}
-                            />
-                            <CheckBox
-                                disabled
-                                checkedIcon={<Text style={styles.checked}>Wed</Text>}
-                                uncheckedIcon={<Text style={styles.unchecked}>Wed</Text>}
-                            />
-                            <CheckBox
-                                disabled
-                                checkedIcon={<Text style={styles.checked}>Thu</Text>}
-                                uncheckedIcon={<Text style={styles.unchecked}>Thu</Text>}
-                            />
-                            <CheckBox
-                                disabled
-                                checkedIcon={<Text style={styles.checked}>Fri</Text>}
-                                uncheckedIcon={<Text style={styles.unchecked}>Fri</Text>}
-                            />
-                            <CheckBox
-                                disabled
-                                checkedIcon={<Text style={styles.checked}>Sat</Text>}
-                                uncheckedIcon={<Text style={styles.unchecked}>Sat</Text>}
-                            />
+                            {
+                                days.map((day, index) => {
+                                    return <CheckBox
+                                        key={day}
+                                        onPress={() => handleCheckbox(index)}
+                                        checked={scheduleState[index]}
+                                        disabled={schedulelist.some(item => item == day)}
+                                        checkedIcon={<Text style={styles.checked}>{day}</Text>}
+                                        uncheckedIcon={
+                                            <Text
+                                                style={
+                                                    schedulelist.some(item => item == day)
+                                                        ?
+                                                        styles.unchecked
+                                                        :
+                                                        styles.disabled
+                                                }>
+                                                {day}
+                                            </Text>}
+                                    />
+                                })
+                            }
                         </View>
                     </Dialog.Content>
                     <Dialog.Actions>

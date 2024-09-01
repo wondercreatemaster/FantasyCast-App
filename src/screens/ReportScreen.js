@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import ReportTable from '../components/ReportTable';
 import fetchWithToken from '../utils/fetchWithToken';
 import { useRoute } from '@react-navigation/native';
+import Header from '../components/Header';
 
 const ReportScreen = ({ navigation }) => {
 	const [search, setSearch] = useState('');
@@ -24,7 +25,7 @@ const ReportScreen = ({ navigation }) => {
 		)
 			.then(response => {
 				response.json().then(
-					data => setReports(data.data)
+					data => setReports([...data.data])
 				)
 			});
 
@@ -47,7 +48,7 @@ const ReportScreen = ({ navigation }) => {
 	return (
 		<ImageBackground source={backgroundImage} style={styles.image}>
 			<View style={styles.container}>
-				<Image source={logoImage} style={styles.logo} />
+				<Header />
 				<View style={styles.tableBg}>
 					<Text style={styles.title}>
 						Manage Reports
@@ -60,7 +61,7 @@ const ReportScreen = ({ navigation }) => {
 							style={styles.input}
 						/>
 						<ScrollView style={{ maxHeight: "80%" }}>
-							<ReportTable reports={reports} />
+							<ReportTable reports={reports} scheduledata={scheduledata} />
 						</ScrollView>
 					</View>
 				</View>

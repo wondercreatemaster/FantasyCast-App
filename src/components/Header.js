@@ -16,6 +16,7 @@ const Header = () => {
         </MenuTrigger>
         <MenuOptions>
           <MenuOption onSelect={() => navigation.navigate('Profile')} text='Profile' />
+          <MenuOption onSelect={() => navigation.navigate('ReportLog')} text='Report Log' />
           <MenuOption onSelect={() => navigation.navigate('Login')} text='Logout' />
         </MenuOptions>
       </Menu>
