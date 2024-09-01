@@ -40,7 +40,7 @@ const LeagueScreen = ({ navigation }) => {
               onChangeText={setSearch}
               style={styles.input}
             />
-            <LeagueTable leagues={leagues} />
+            <LeagueTable leagues={leagues.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))} />
           </View>
         </View>
       </View>

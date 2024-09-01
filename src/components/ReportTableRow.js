@@ -49,6 +49,10 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 	}, [scheduled, scheduleDlg])
 
 	useEffect(() => {
+		setVoice(null)
+	}, [scheduleDlg, runnowDlg])
+
+	useEffect(() => {
 		fetchWithToken(
 			"https://fantasycastcentral.com/api/user/reportlog/voice/list",
 			{
@@ -138,7 +142,7 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 							valueField="value"
 							placeholder="Audio"
 							value={voice}
-							onChange={item => setVoicelist(item.value)}
+							onChange={item => setVoice(item.value)}
 						/>
 
 						<SoundPlayer />
