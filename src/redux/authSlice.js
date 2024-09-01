@@ -1,3 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 
@@ -28,6 +30,9 @@ const authReducer = (state = initialState, action) => {
 };
 
 export const login = (user) => ({ type: LOGIN, payload: { user } });
-export const logout = () => ({ type: LOGOUT });
+export const logout = () => {
+  AsyncStorage.setItem('token', null);
+  return { type: LOGOUT }
+};
 
 export default authReducer;

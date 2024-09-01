@@ -61,7 +61,12 @@ const ReportScreen = ({ navigation }) => {
 							style={styles.input}
 						/>
 						<ScrollView style={{ maxHeight: "80%" }}>
-							<ReportTable reports={reports} scheduledata={scheduledata} />
+							<ReportTable
+								reports={reports}
+								scheduledata={scheduledata}
+								league={league}
+								setScheduleData={setScheduleData}
+							/>
 						</ScrollView>
 					</View>
 				</View>

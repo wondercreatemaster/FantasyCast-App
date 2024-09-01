@@ -3,9 +3,12 @@ import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-m
 import logoImage from '../assets/images/logo.png'
 import { Icon } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { logout } from "../redux/authSlice";
 
 const Header = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
@@ -17,7 +20,7 @@ const Header = () => {
         <MenuOptions>
           <MenuOption onSelect={() => navigation.navigate('Profile')} text='Profile' />
           <MenuOption onSelect={() => navigation.navigate('ReportLog')} text='Report Log' />
-          <MenuOption onSelect={() => navigation.navigate('Login')} text='Logout' />
+          <MenuOption onSelect={() => dispatch(logout())} text='Logout' />
         </MenuOptions>
       </Menu>
     </View>
