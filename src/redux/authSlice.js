@@ -4,6 +4,7 @@ const LOGOUT = 'LOGOUT';
 const initialState = {
   user: null,
   isLoading: false,
+  isLoggedin: false
 };
 
 const authReducer = (state = initialState, action) => {
@@ -12,11 +13,13 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.user,
-        isLoading: false
+        isLoading: false,
+        isLoggedin: true,
       };
     case LOGOUT:
       return {
         ...state,
+        isLoggedin: false,
         user: null,
       };
     default:
