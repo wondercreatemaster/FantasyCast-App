@@ -10,9 +10,8 @@ import fetchWithToken from '../utils/fetchWithToken';
 
 
 const types = [
-    { label: 'type1', value: "Type1" },
-    { label: 'type2', value: "Type2" },
-    { label: 'type3', value: "Type3" },
+    { label: 'Text', value: "1" },
+    { label: 'Text & Audio', value: "2" },
 ]
 
 const ReportTableRow = ({ report }) => {
@@ -54,7 +53,7 @@ const ReportTableRow = ({ report }) => {
 
     const hideSchedule = () => setScheduleDlg(false);
 
-    const [type, setType] = useState(null)
+    const [type, setType] = useState('1')
 
     const [email, setEmail] = useState('')
 

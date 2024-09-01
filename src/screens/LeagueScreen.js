@@ -1,10 +1,10 @@
 import { Alert, Button, Image, ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
 import backgroundImage from '../assets/images/bg.jpg';
-import logoImage from '../assets/images/logo.png'
 import { useEffect, useState } from 'react';
 import LeagueTable from '../components/LeagueTable';
 import { useSelector } from 'react-redux';
 import fetchWithToken from '../utils/fetchWithToken';
+import Header from '../components/Header';
 
 const LeagueScreen = ({ navigation }) => {
   const [search, setSearch] = useState('');
@@ -28,7 +28,7 @@ const LeagueScreen = ({ navigation }) => {
   return (
     <ImageBackground source={backgroundImage} style={styles.image}>
       <View style={styles.container}>
-        <Image source={logoImage} style={styles.logo} />
+        <Header />
         <View style={styles.tableBg}>
           <Text style={styles.title}>
             Your Leagues
@@ -63,12 +63,6 @@ const styles = StyleSheet.create({
   table: {
     backgroundColor: "white",
     padding: 15
-  },
-  logo: {
-    width: "20%",
-    height: "8%",
-    resizeMode: "contain",
-    marginVertical: 10
   },
   image: {
     flex: 1,

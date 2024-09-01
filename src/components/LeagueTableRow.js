@@ -33,7 +33,7 @@ const LeagueTableRow = ({ league }) => {
     const [feedbacks, setFeedbacks] = useState([]);
     const [teams, setTeams] = useState([]);
 
-    const ReportPress = () => navigation.navigate("Report");
+    const ReportPress = () => navigation.navigate("Report", { league });
 
     const fetchFeedback = async () => {
         const response = await fetchWithToken(
