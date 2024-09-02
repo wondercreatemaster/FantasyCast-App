@@ -12,7 +12,7 @@ const ReportTable = ({ reports, scheduledata, league, setScheduleData }) => {
 				<DataTable.Title style={styles.header}>Action</DataTable.Title>
 			</DataTable.Header>
 			{
-				reports && reports.map(report =>
+				reports != undefined && reports.map(report =>
 					<ReportTableRow
 						key={report._id}
 						report={report}

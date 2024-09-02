@@ -1,7 +1,9 @@
+import { Button, Icon } from "@rneui/themed";
 import { useState } from "react";
-import { Button, ScrollView, StyleSheet } from "react-native";
+import { Alert, ScrollView, StyleSheet } from "react-native";
 import { Text } from "react-native";
 import { DataTable, Dialog, Portal } from "react-native-paper";
+import * as FileSystem from 'expo-file-system'
 
 const ReportLogTableRow = ({ reportlog }) => {
   const date = new Date(reportlog.run_date);
@@ -11,6 +13,22 @@ const ReportLogTableRow = ({ reportlog }) => {
   const showDialog = () => setOpen(true);
 
   const hideDialog = () => setOpen(false);
+
+  const handleDownloadContent = async () => {
+
+    const fileUri = FileSystem.documentDirectory + 'download.txt';
+
+    try {
+      // Write the content to a text file
+      await FileSystem.writeAsStringAsync(fileUri, reportlog.content, {
+        encoding: FileSystem.EncodingType.UTF8,
+      });
+      Alert.alert('Success', "Successfully Downloaded \n" + fileUri, [{ text: 'OK' }]);
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Error', 'Failed to download file.', [{ text: 'OK' }]);
+    }
+  }
 
   return (
     <DataTable.Row onPress={showDialog}>
@@ -31,8 +49,13 @@ const ReportLogTableRow = ({ reportlog }) => {
               </Text>
             </ScrollView>
           </Dialog.Content>
-          <Dialog.Actions>
-            <Button title="Close" onPress={hideDialog} />
+          <Dialog.Actions style={{ gap: 20 }}>
+            <Button radius='sm' onPress={handleDownloadContent}>
+              <Icon name="download" color="white" />
+            </Button>
+            <Button radius='sm' onPress={hideDialog}>
+              Close
+            </Button>
           </Dialog.Actions>
         </Dialog>
       </Portal>
