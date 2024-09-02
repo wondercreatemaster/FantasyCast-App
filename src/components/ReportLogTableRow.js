@@ -50,6 +50,13 @@ const ReportLogTableRow = ({ reportlog }) => {
             </ScrollView>
           </Dialog.Content>
           <Dialog.Actions style={{ gap: 20 }}>
+            {
+              reportlog.is_file && (
+                <Button radius='sm'>
+                  <Icon name="cloud-download" color="white" />
+                </Button>
+              )
+            }
             <Button radius='sm' onPress={handleDownloadContent}>
               <Icon name="download" color="white" />
             </Button>
