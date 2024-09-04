@@ -1,9 +1,9 @@
-import backgroundImage from '../assets/images/bg.jpg';
+import backgroundImage from '../../assets/images/bg.jpg';
 import { ImageBackground, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
-import Header from '../components/Header';
+import Header from '../../components/Header';
 import { useEffect, useState } from 'react';
-import fetchWithToken from '../utils/fetchWithToken';
-import ReportLogTable from '../components/ReportLogTable';
+import fetchWithToken from '../../utils/fetchWithToken';
+import ReportLogTable from '../../components/home/reportlog/ReportLogTable';
 
 const ReportLogScreen = () => {
   const [search, setSearch] = useState("")

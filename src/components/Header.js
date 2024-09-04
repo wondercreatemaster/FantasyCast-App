@@ -1,21 +1,42 @@
 import { Image, StyleSheet, View } from "react-native";
 import { Menu, MenuOption, MenuOptions, MenuTrigger } from "react-native-popup-menu";
-import logoImage from '../assets/images/logo.png'
-import { Icon } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/authSlice";
+import { Icon, IconButton, Text } from "react-native-paper";
+import { useFonts } from 'expo-font';
+import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 
-const Header = () => {
+
+const Header = ({ title, back = true }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
+  let [fontsLoaded] = useFonts({
+    Poppins_400Regular,
+    Poppins_500Medium,
+    Poppins_600SemiBold
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <View style={styles.container}>
-      <Image source={logoImage} style={styles.logo} />
+      <IconButton
+        icon="arrow-left"
+        iconColor={back ? "white" : "#181928"}
+        disabled={!back}
+        size={30}
+        onPress={() => navigation.goBack()}
+      />
+      <Text variant="headlineSmall" style={styles.title}>
+        {title}
+      </Text>
       <Menu>
         <MenuTrigger>
-          <Icon name="menu" />
+          <IconButton icon="menu" iconColor="#606074" size={30} />
         </MenuTrigger>
         <MenuOptions>
           <MenuOption onSelect={() => navigation.navigate('Profile')} text='Profile' />
@@ -33,13 +54,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    marginTop: 30
   },
-  logo: {
-    width: 70,
-    height: 50,
-    resizeMode: "contain",
-    marginVertical: 10
-  },
+  title: {
+    color: "#1976D2",
+    fontFamily: "Poppins_600SemiBold"
+  }
 })
 
 export default Header;

@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Button, DataTable, Dialog, Divider, Portal, TextInput } from 'react-native-paper';
-import { Alert, Text } from 'react-native';
+import { Button, DataTable, Dialog, Divider, Portal } from 'react-native-paper';
+import { Alert, Text, TextInput, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useNavigation } from '@react-navigation/native';
-import fetchWithToken from '../utils/fetchWithToken';
+import fetchWithToken from '../../../utils/fetchWithToken';
 
 const LeagueTableRow = ({ league }) => {
     const navigation = useNavigation();
@@ -111,33 +111,29 @@ const LeagueTableRow = ({ league }) => {
     }
 
     return (
-        <DataTable.Row className="h-20">
-            <DataTable.Cell style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
-                <Text className="text-center">
+        <View style={{ borderBottomWidth: 1.3, borderColor: "#2E2F3E" }}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", marginVertical: 20 }}>
+                <Text className="text-center text-white">
                     {league.name}
                 </Text>
-            </DataTable.Cell>
-            <DataTable.Cell style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
-                <Text className="text-center">
+                <Text className="text-center text-white">
                     {league.season}
                 </Text>
-            </DataTable.Cell>
-            <DataTable.Cell onPress={ReportPress} style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
-                <Text className="text-center text-blue-500">
+            </View>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 20 }}>
+                <Button onPress={ReportPress} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 12 }}>
                     Manage Reports
-                </Text>
-            </DataTable.Cell>
-            <DataTable.Cell onPress={showDialog} style={{ flex: 1, flexDirection: "column", alignItems: 'center', justifyContent: "center" }}>
-                <Text className="text-center text-blue-500">
-                    Your SideLine Snippets
-                </Text>
-            </DataTable.Cell>
+                </Button>
+                <Button onPress={showDialog} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 12 }}>
+                    SideLine Snippets
+                </Button>
+            </View>
             <Portal>
-                <Dialog visible={visible} onDismiss={hideDialog} className="rounded-md bg-white">
-                    <Dialog.Title>Your Sideline Snippets</Dialog.Title>
+                <Dialog visible={visible} onDismiss={hideDialog} className="rounded-3xl bg-white">
+                    <Dialog.Title style={{ textAlign: "center" }}>Your Sideline Snippets</Dialog.Title>
                     <Dialog.Content className="gap-2">
                         <Dropdown
-                            className="rounded-md p-2 border-2 border-slate-300"
+                            className="rounded-2xl p-4 border-2 border-[#606074] text-[#606074]"
                             data={teams}
                             labelField="label"
                             valueField="value"
@@ -147,7 +143,7 @@ const LeagueTableRow = ({ league }) => {
                         />
 
                         <Dropdown
-                            className="rounded-md p-2 border-2 border-slate-300"
+                            className="rounded-2xl p-4 border-2 border-[#606074] text-[#606074]"
                             data={weeks}
                             labelField="label"
                             valueField="value"
@@ -158,17 +154,27 @@ const LeagueTableRow = ({ league }) => {
 
                         <TextInput
                             placeholder='Feedback'
+                            className="rounded-2xl p-4 border-2 border-[#606074] text-[#606074]"
                             multiline
+                            numberOfLines={5}
+                            textAlignVertical='top'
                             value={comment}
                             onChangeText={text => setComment(text)}
                         />
                     </Dialog.Content>
-                    <Dialog.Actions>
-                        <Button onPress={handleFeedback}>Save</Button>
+                    <Dialog.Actions style={{ justifyContent: "center" }}>
+                        <Button
+                            onPress={handleFeedback}
+                            mode='contained'
+                            buttonColor='#1976D2'
+                            style={{ paddingHorizontal: 40 }}
+                        >
+                            Save
+                        </Button>
                     </Dialog.Actions>
                 </Dialog>
             </Portal>
-        </DataTable.Row>
+        </View>
     )
 }
 

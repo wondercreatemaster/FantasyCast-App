@@ -31,7 +31,7 @@ const authReducer = (state = initialState, action) => {
 
 export const login = (user) => ({ type: LOGIN, payload: { user } });
 export const logout = () => {
-  AsyncStorage.setItem('token', null);
+  AsyncStorage.removeItem('token');
   return { type: LOGOUT }
 };
 

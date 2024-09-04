@@ -1,45 +1,41 @@
 import { StyleSheet, Text, View } from "react-native";
-import { AntDesign } from "react-native-vector-icons"
 import Slider from '@react-native-community/slider';
+import { IconButton } from "react-native-paper";
 
 const SoundPlayer = ({ sound }) => {
     return (
-        <View style={styles.container}>
-            <AntDesign name="play" size={20} color="#e75480" />
-            <Text>0:00 / 0:02</Text>
-            <Slider
-                minimumValue={0}
-                maximumValue={100}
-                minimumTrackTintColor="#e75480"
-                maximumTrackTintColor="#d3d3d3"
-                thumbTintColor="#e75480"
-                value={50}
-                style={styles.slider}
-            />
-
+        <View
+            className="rounded-2xl p-4 border-2 border-[#606074] text-[#606074]"
+            style={styles.container}
+        >
+            <IconButton icon="play" size={20} iconColor="#1976D2" style={{ marginHorizontal: -10 }} />
+            <View className="w-[50%]">
+                <Slider
+                    minimumValue={0}
+                    maximumValue={100}
+                    minimumTrackTintColor="#1976D2"
+                    maximumTrackTintColor="#606074"
+                    thumbTintColor="#1976D2"
+                    value={50}
+                    style={styles.slider}
+                />
+            </View>
+            <Text style={{ width: "30%" }}>0:00 / 0:02</Text>
+            <IconButton icon="volume-high" size={20} iconColor="#606074" />
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     container: {
-        height: 50,
-        margin: 10,
-        borderRadius: 25,
-        padding: 15,
-        width: "auto",
+        width: "100%",
         alignItems: "center",
-        gap: 15,
         flexDirection: "row",
-        backgroundColor: '#ddffee',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.8,
-        shadowRadius: 2,
-        elevation: 5
+        height: 60,
+        justifyContent: "space-between"
     },
     slider: {
-        width: "60%"
+        width: "100%"
     }
 })
 

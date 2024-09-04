@@ -1,10 +1,10 @@
 import { Alert, Button, ImageBackground, Text, View } from "react-native";
 import { StyleSheet } from "react-native";
-import backgroundImage from '../assets/images/bg.jpg';
-import Header from "../components/Header";
+import backgroundImage from '../../assets/images/bg.jpg';
+import Header from "../../components/Header";
 import { TextInput } from "react-native-paper";
 import { useEffect, useState } from "react";
-import fetchWithToken from "../utils/fetchWithToken";
+import fetchWithToken from "../../utils/fetchWithToken";
 
 
 const ProfileScreen = ({ navigation }) => {
