@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginBottom: 10,
     paddingHorizontal: 8,
+    fontFamily: "Poppins_400Regular"
   },
 });
 

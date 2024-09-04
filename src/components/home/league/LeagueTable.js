@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
     padding: 10
   },
   header: {
-    color: "white"
+    color: "white",
+    fontFamily: "Poppins_400Regular"
   },
   list: {
     backgroundColor: "#252536",

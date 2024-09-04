@@ -113,30 +113,33 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 	return (
 		<View style={{ borderBottomWidth: 1.3, borderColor: "#2E2F3E" }}>
 			<View style={styles.cell}>
-				<Text className="text-base text-white">
+				<Text className="text-base text-white" style={{ fontFamily: "Poppins_500Medium" }}>
 					{report.description}
 					{'\n'}
-					<Text className="text-sm">
+					<Text className="text-sm" style={{ fontFamily: "Poppins_400Regular" }}>
 						{report.name}
 					</Text>
 				</Text>
 			</View>
 			<View>
 				<View style={styles.action}>
-					<Button mode='contained' textColor='white' buttonColor='#1976D2' onPress={showRunnow}>
+					<Button mode='contained' textColor='white' buttonColor='#1976D2' labelStyle={{ fontFamily: "Poppins_500Medium" }} onPress={showRunnow}>
 						Run Now
 					</Button>
-					<Button mode='contained' textColor='white' buttonColor='#1976D2' onPress={showSchedule}>
+					<Button mode='contained' textColor='white' buttonColor='#1976D2' labelStyle={{ fontFamily: "Poppins_500Medium" }} onPress={showSchedule}>
 						Schedule
 					</Button>
 				</View>
 			</View>
 			<Portal>
 				<Dialog visible={runnowDlg} onDismiss={hideRunnow} className="rounded-3xl bg-white">
-					<Dialog.Title className="text-center">{report.name}</Dialog.Title>
+					<Dialog.Title className="text-center" style={{ fontFamily: "Poppins_600SemiBold", fontSize: 20 }}>{report.name}</Dialog.Title>
 					<Dialog.Content className="gap-2 w-[100%]">
 						<Dropdown
 							className="rounded-2xl p-4 border-2 border-[#606074] text-[#606074]"
+							itemTextStyle={{ fontFamily: "Poppins_500Medium" }}
+							placeholderStyle={{ fontFamily: "Poppins_500Medium" }}
+							selectedTextStyle={{ fontFamily: "Poppins_500Medium" }}
 							data={voicelist}
 							labelField="label"
 							valueField="value"
@@ -149,6 +152,9 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 						</View>
 						<Dropdown
 							className="rounded-2xl p-4 border-2 border-[#606074] text-[#606074]"
+							itemTextStyle={{ fontFamily: "Poppins_500Medium" }}
+							placeholderStyle={{ fontFamily: "Poppins_500Medium" }}
+							selectedTextStyle={{ fontFamily: "Poppins_500Medium" }}
 							data={types}
 							labelField="label"
 							valueField="value"
@@ -162,7 +168,7 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 								placeholder='Email'
 								value={email}
 								onChangeText={text => setEmail(text)}
-								style={{ width: "80%", color: "#606074" }}
+								style={{ width: "80%", color: "#606074", fontFamily: "Poppins_500Medium" }}
 							/>
 							<IconButton icon="plus-circle" size={20} color="#e75480" style={{ margin: -10 }} />
 						</View>
@@ -172,7 +178,8 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 						<Button
 							mode='contained'
 							buttonColor='#1976D2'
-							style={{ paddingHorizontal: 40 }}
+							style={{ paddingHorizontal: 60, paddingVertical: 5 }}
+							labelStyle={{ fontFamily: "Poppins_500Medium" }}
 						>
 							Save
 						</Button>
@@ -180,10 +187,13 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 				</Dialog>
 
 				<Dialog visible={scheduleDlg} onDismiss={hideSchedule} className="rounded-3xl bg-white">
-					<Dialog.Title className="text-center">{report.name}</Dialog.Title>
+					<Dialog.Title className="text-center" style={{ fontFamily: "Poppins_600SemiBold", fontSize: 20 }}>{report.name}</Dialog.Title>
 					<Dialog.Content className="gap-2">
 						<Dropdown
 							className="rounded-2xl p-4 border-2 border-[#606074] text-[#606074]"
+							itemTextStyle={{ fontFamily: "Poppins_500Medium" }}
+							placeholderStyle={{ fontFamily: "Poppins_500Medium" }}
+							selectedTextStyle={{ fontFamily: "Poppins_500Medium" }}
 							data={voicelist}
 							labelField="label"
 							valueField="value"
@@ -229,7 +239,8 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 							onPress={handleScheduleUpdate}
 							mode='contained'
 							buttonColor='#1976D2'
-							style={{ paddingHorizontal: 40 }}
+							style={{ paddingHorizontal: 60, paddingVertical: 5 }}
+							labelStyle={{ fontFamily: "Poppins_500Medium" }}
 						>
 							Save
 						</Button>
@@ -256,6 +267,7 @@ const styles = StyleSheet.create({
 	checked: {
 		borderColor: "#2222ff",
 		borderRadius: 40,
+		fontFamily: "Poppins_500Medium",
 		paddingVertical: 10,
 		borderWidth: 1,
 		backgroundColor: "#2222ff",
@@ -268,6 +280,7 @@ const styles = StyleSheet.create({
 	unchecked: {
 		borderColor: "#2222ff",
 		borderRadius: 40,
+		fontFamily: "Poppins_500Medium",
 		paddingVertical: 10,
 		borderWidth: 1,
 		textAlign: "center",
@@ -279,6 +292,7 @@ const styles = StyleSheet.create({
 		borderColor: "#999999",
 		color: "#999999",
 		borderRadius: 40,
+		fontFamily: "Poppins_500Medium",
 		paddingVertical: 10,
 		borderWidth: 1,
 		textAlign: "center",

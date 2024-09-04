@@ -11,25 +11,12 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { CheckBox } from '@rneui/themed';
 import { Button } from 'react-native-paper';
 
-import { useFonts } from 'expo-font';
-import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 
 const LoginScreen = ({ navigation }) => {
 
     const [sleeperId, setSleeperId] = useState('');
     const [password, setPassword] = useState('');
     const dispatch = useDispatch();
-
-    let [fontsLoaded] = useFonts({
-        Poppins_400Regular,
-        Poppins_500Medium,
-        Poppins_600SemiBold
-    });
-
-    if (!fontsLoaded) {
-        return null;
-    }
-
 
     const handleLogin = async () => {
 
@@ -119,6 +106,7 @@ const LoginScreen = ({ navigation }) => {
                         onPress={() => navigation.navigate('Signup')}
                         textColor='#1976D2'
                         labelStyle={{ fontFamily: "Poppins_500Medium" }}
+                        style={{ paddingVertical: 5 }}
                     >
                         Register Now
                     </Button>

@@ -20,7 +20,7 @@ const SoundPlayer = ({ sound }) => {
                     style={styles.slider}
                 />
             </View>
-            <Text style={{ width: "30%" }}>0:00 / 0:02</Text>
+            <Text style={{ width: "30%", fontFamily: "Poppins_500Medium" }}>0:00 / 0:02</Text>
             <IconButton icon="volume-high" size={20} iconColor="#606074" />
         </View>
     )

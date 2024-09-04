@@ -4,23 +4,11 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/authSlice";
 import { Icon, IconButton, Text } from "react-native-paper";
-import { useFonts } from 'expo-font';
-import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
 
 
 const Header = ({ title, back = true }) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
-  let [fontsLoaded] = useFonts({
-    Poppins_400Regular,
-    Poppins_500Medium,
-    Poppins_600SemiBold
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
 
   return (
     <View style={styles.container}>

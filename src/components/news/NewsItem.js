@@ -8,20 +8,20 @@ const NewsItem = () => {
       <Avatar.Image size={30} source={User} />
       <View style={{ flex: 1, gap: 5 }}>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          <Text className="text-white">
+          <Text className="text-white" style={{ fontFamily: "Poppins_500Medium" }}>
             This is content
           </Text>
           <View style={{ flexDirection: "row", gap: 30 }}>
             <Avatar.Image size={20} source={User} />
-            <Text className="text-white">
+            <Text className="text-white" style={{ fontFamily: "Poppins_500Medium" }}>
               Fallers
             </Text>
           </View>
         </View>
-        <Text className="text-white">
+        <Text className="text-white" style={{ fontFamily: "Poppins_400Regular" }}>
           This is main Content. There will
         </Text>
-        <Text className="text-[#606074]">
+        <Text className="text-[#606074]" style={{ fontFamily: "Poppins_400Regular" }}>
           2024-09-03 00:00:00
         </Text>
       </View>

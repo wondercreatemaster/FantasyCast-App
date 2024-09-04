@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
 	header: {
 		color: "white",
 		marginTop: 20,
-		padding: 10
+		padding: 10,
+		fontFamily: "Poppins_400Regular"
 	},
 	list: {
 		backgroundColor: "#252536",

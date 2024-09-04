@@ -113,27 +113,30 @@ const LeagueTableRow = ({ league }) => {
     return (
         <View style={{ borderBottomWidth: 1.3, borderColor: "#2E2F3E" }}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", marginVertical: 20 }}>
-                <Text className="text-center text-white">
+                <Text className="text-center text-white" style={{ fontFamily: "Poppins_500Medium" }}>
                     {league.name}
                 </Text>
-                <Text className="text-center text-white">
+                <Text className="text-center text-white" style={{ fontFamily: "Poppins_500Medium" }}>
                     {league.season}
                 </Text>
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 20 }}>
-                <Button onPress={ReportPress} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 12 }}>
+                <Button onPress={ReportPress} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 12, fontFamily: "Poppins_500Medium" }}>
                     Manage Reports
                 </Button>
-                <Button onPress={showDialog} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 12 }}>
+                <Button onPress={showDialog} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 12, fontFamily: "Poppins_500Medium" }}>
                     SideLine Snippets
                 </Button>
             </View>
             <Portal>
                 <Dialog visible={visible} onDismiss={hideDialog} className="rounded-3xl bg-white">
-                    <Dialog.Title style={{ textAlign: "center" }}>Your Sideline Snippets</Dialog.Title>
+                    <Dialog.Title style={{ textAlign: "center", fontFamily: "Poppins_600SemiBold" }}>Your Sideline Snippets</Dialog.Title>
                     <Dialog.Content className="gap-2">
                         <Dropdown
                             className="rounded-2xl p-4 border-2 border-[#606074] text-[#606074]"
+                            itemTextStyle={{ fontFamily: "Poppins_500Medium" }}
+                            selectedTextStyle={{ fontFamily: "Poppins_500Medium" }}
+                            placeholderStyle={{ fontFamily: "Poppins_500Medium" }}
                             data={teams}
                             labelField="label"
                             valueField="value"
@@ -144,6 +147,9 @@ const LeagueTableRow = ({ league }) => {
 
                         <Dropdown
                             className="rounded-2xl p-4 border-2 border-[#606074] text-[#606074]"
+                            itemTextStyle={{ fontFamily: "Poppins_500Medium" }}
+                            selectedTextStyle={{ fontFamily: "Poppins_500Medium" }}
+                            placeholderStyle={{ fontFamily: "Poppins_500Medium" }}
                             data={weeks}
                             labelField="label"
                             valueField="value"
@@ -155,6 +161,7 @@ const LeagueTableRow = ({ league }) => {
                         <TextInput
                             placeholder='Feedback'
                             className="rounded-2xl p-4 border-2 border-[#606074] text-[#606074]"
+                            style={{ fontFamily: "Poppins_500Medium" }}
                             multiline
                             numberOfLines={5}
                             textAlignVertical='top'
@@ -167,7 +174,8 @@ const LeagueTableRow = ({ league }) => {
                             onPress={handleFeedback}
                             mode='contained'
                             buttonColor='#1976D2'
-                            style={{ paddingHorizontal: 40 }}
+                            style={{ paddingHorizontal: 70, paddingVertical: 5 }}
+                            labelStyle={{ fontFamily: "Poppins_500Medium" }}
                         >
                             Save
                         </Button>

@@ -3,25 +3,12 @@ import { View, TextInput, StyleSheet, Text, ScrollView } from 'react-native';
 import { Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 
-import { useFonts } from 'expo-font';
-import { Poppins_400Regular, Poppins_500Medium, Poppins_600SemiBold } from '@expo-google-fonts/poppins';
-
 const SignupScreen = ({ navigation }) => {
   const [sleeperId, setSleeperId] = useState('');
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-
-  let [fontsLoaded] = useFonts({
-    Poppins_400Regular,
-    Poppins_500Medium,
-    Poppins_600SemiBold
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
 
   const handleSignup = async () => {
     if (password !== confirmpassword || password.length == 0) {
