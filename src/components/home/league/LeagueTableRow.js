@@ -125,7 +125,7 @@ const LeagueTableRow = ({ league }) => {
                     Manage Reports
                 </Button>
                 <Button onPress={showDialog} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 12, fontFamily: "Poppins_500Medium" }}>
-                    SideLine Snippets
+                    Sideline Snippets
                 </Button>
             </View>
             <Portal>

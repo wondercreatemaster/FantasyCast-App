@@ -5,10 +5,10 @@ import ReportTableRow from './ReportTableRow';
 const ReportTable = ({ reports, scheduledata, league, setScheduleData }) => {
 	const { report_schedule } = scheduledata;
 	return (
-		<View>
+		<View style={{ maxHeight: "88%" }}>
 			<Text style={styles.header}>Report Name</Text>
-			<View style={styles.list}>
-				<ScrollView>
+			<ScrollView>
+				<View style={styles.list}>
 					{
 						reports != undefined && reports.map(report =>
 							<ReportTableRow
@@ -20,8 +20,8 @@ const ReportTable = ({ reports, scheduledata, league, setScheduleData }) => {
 							/>
 						)
 					}
-				</ScrollView>
-			</View>
+				</View>
+			</ScrollView>
 		</View>
 	);
 };
@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
 		backgroundColor: "#252536",
 		borderRadius: 20,
 		paddingHorizontal: 20,
-		maxHeight: "80%"
 	}
 });
 

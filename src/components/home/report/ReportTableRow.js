@@ -116,7 +116,7 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 				<Text className="text-base text-white" style={{ fontFamily: "Poppins_500Medium" }}>
 					{report.description}
 					{'\n'}
-					<Text className="text-sm" style={{ fontFamily: "Poppins_400Regular" }}>
+					<Text className="text-sm italic" style={{ fontFamily: "Poppins_400Regular" }}>
 						{report.name}
 					</Text>
 				</Text>
@@ -170,7 +170,7 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 								onChangeText={text => setEmail(text)}
 								style={{ width: "80%", color: "#606074", fontFamily: "Poppins_500Medium" }}
 							/>
-							<IconButton icon="plus-circle" size={20} color="#e75480" style={{ margin: -10 }} />
+							<IconButton icon="plus-circle" size={20} style={{ margin: -10 }} iconColor='#1976D2' />
 						</View>
 
 					</Dialog.Content>
@@ -265,12 +265,12 @@ const styles = StyleSheet.create({
 		marginBottom: 20
 	},
 	checked: {
-		borderColor: "#2222ff",
+		borderColor: "#1976D2",
 		borderRadius: 40,
 		fontFamily: "Poppins_500Medium",
 		paddingVertical: 10,
 		borderWidth: 1,
-		backgroundColor: "#2222ff",
+		backgroundColor: "#1976D2",
 		color: "white",
 		width: 40,
 		textAlign: "center",
@@ -278,7 +278,7 @@ const styles = StyleSheet.create({
 		fontSize: 10
 	},
 	unchecked: {
-		borderColor: "#2222ff",
+		borderColor: "#1976D2",
 		borderRadius: 40,
 		fontFamily: "Poppins_500Medium",
 		paddingVertical: 10,
