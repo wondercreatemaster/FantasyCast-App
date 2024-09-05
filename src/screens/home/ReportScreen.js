@@ -4,6 +4,7 @@ import ReportTable from '../../components/home/report/ReportTable';
 import fetchWithToken from '../../utils/fetchWithToken';
 import { useRoute } from '@react-navigation/native';
 import Header from '../../components/Header';
+import { Icon } from 'react-native-paper';
 
 const ReportScreen = ({ navigation }) => {
 	const [search, setSearch] = useState('');
@@ -47,12 +48,15 @@ const ReportScreen = ({ navigation }) => {
 		<View style={styles.container}>
 			<Header title="Manage Reports" />
 			<View style={styles.table}>
-				<TextInput
-					placeholder="Search..."
-					value={search}
-					onChangeText={setSearch}
-					style={styles.input}
-				/>
+				<View style={styles.input}>
+					<TextInput
+						placeholder="Search..."
+						value={search}
+						onChangeText={setSearch}
+						style={{ fontFamily: "Poppins_400Regular" }}
+					/>
+					<Icon source="magnify" size={20} />
+				</View>
 				{
 					scheduledata != null &&
 					<ReportTable
@@ -88,7 +92,9 @@ const styles = StyleSheet.create({
 		borderRadius: 15,
 		marginBottom: 10,
 		paddingHorizontal: 8,
-		fontFamily: "Poppins_400Regular"
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "center"
 	},
 });
 

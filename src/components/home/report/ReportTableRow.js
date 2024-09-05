@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Button, DataTable, Dialog, Divider, IconButton, Portal } from 'react-native-paper';
 import { Alert, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
-import { AntDesign } from "react-native-vector-icons"
 import SoundPlayer from '../../SoundPlayer';
 import { CheckBox } from '@rneui/themed';
 import fetchWithToken from '../../../utils/fetchWithToken';
@@ -123,10 +122,10 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 			</View>
 			<View>
 				<View style={styles.action}>
-					<Button mode='contained' textColor='white' buttonColor='#1976D2' labelStyle={{ fontFamily: "Poppins_500Medium" }} onPress={showRunnow}>
+					<Button mode='contained' textColor='white' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }} onPress={showRunnow}>
 						Run Now
 					</Button>
-					<Button mode='contained' textColor='white' buttonColor='#1976D2' labelStyle={{ fontFamily: "Poppins_500Medium" }} onPress={showSchedule}>
+					<Button mode='contained' textColor='white' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }} onPress={showSchedule}>
 						Schedule
 					</Button>
 				</View>

@@ -1,6 +1,6 @@
 // src/screens/LoginScreen.js
-import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Image, ImageBackground, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, TextInput, StyleSheet, Image, ImageBackground, Text, Keyboard } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/authSlice';
 import backgroundImage from '../../assets/images/bg.png';
@@ -13,6 +13,23 @@ import { Button } from 'react-native-paper';
 
 
 const LoginScreen = ({ navigation }) => {
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+            'keyboardDidShow',
+            () => setKeyboardVisible(true)
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+            'keyboardDidHide',
+            () => setKeyboardVisible(false)
+        );
+
+        return () => {
+            keyboardDidShowListener.remove();
+            keyboardDidHideListener.remove();
+        };
+    }, []);
 
     const [sleeperId, setSleeperId] = useState('');
     const [password, setPassword] = useState('');
@@ -48,7 +65,7 @@ const LoginScreen = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <View style={{ flex: 1, height: "40%" }}>
+            <View style={{ flex: 1, height: "35%" }}>
                 <ImageBackground source={backgroundImage} style={styles.image}>
                     <LinearGradient colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0)', '#181928']} style={styles.gradient}>
                         <Image source={logo} style={styles.logo} />
@@ -120,8 +137,7 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: "#181928",
         flex: 1,
-        height: "100%"
-        // justifyContent: "space-between"
+        justifyContent: "flex-end"
     },
     image: {
         flex: 1,
@@ -130,14 +146,13 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     logo: {
-        width: "60%",
-        position: "absolute",
+        height: "60%",
         bottom: -50,
         resizeMode: "contain"
     },
     title: {
         margin: 'auto',
-        marginBottom: 30,
+        marginBottom: 10,
         color: "white",
         fontSize: 32,
         textAlign: "center",
@@ -147,7 +162,8 @@ const styles = StyleSheet.create({
         display: "flex",
         gap: 20,
         paddingHorizontal: 20,
-        height: "60%"
+        paddingVertical: 20,
+        maxHeight: "100%"
     },
     checkbox: {
         backgroundColor: "rgba(0,0,0,0)",

@@ -121,10 +121,10 @@ const LeagueTableRow = ({ league }) => {
                 </Text>
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 20 }}>
-                <Button onPress={ReportPress} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 12, fontFamily: "Poppins_500Medium" }}>
+                <Button onPress={ReportPress} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }}>
                     Manage Reports
                 </Button>
-                <Button onPress={showDialog} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 12, fontFamily: "Poppins_500Medium" }}>
+                <Button onPress={showDialog} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }}>
                     Sideline Snippets
                 </Button>
             </View>

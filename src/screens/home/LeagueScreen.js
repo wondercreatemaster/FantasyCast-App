@@ -4,6 +4,7 @@ import LeagueTable from '../../components/home/league/LeagueTable';
 import { useSelector } from 'react-redux';
 import fetchWithToken from '../../utils/fetchWithToken';
 import Header from '../../components/Header';
+import { Icon } from 'react-native-paper';
 
 const LeagueScreen = ({ navigation }) => {
   const [search, setSearch] = useState('');
@@ -28,12 +29,15 @@ const LeagueScreen = ({ navigation }) => {
     <View style={styles.container}>
       <Header title="Your Leagues" back={false} />
       <View style={styles.table}>
-        <TextInput
-          placeholder="Search..."
-          value={search}
-          onChangeText={setSearch}
-          style={styles.input}
-        />
+        <View style={styles.input}>
+          <TextInput
+            placeholder="Search..."
+            value={search}
+            onChangeText={setSearch}
+            style={{ fontFamily: "Poppins_400Regular" }}
+          />
+          <Icon source="magnify" size={20} />
+        </View>
         <LeagueTable leagues={leagues.filter(item => item.name.toLowerCase().includes(search.toLowerCase()))} />
       </View>
     </View>
@@ -55,7 +59,9 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginBottom: 10,
     paddingHorizontal: 8,
-    fontFamily: "Poppins_400Regular"
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
   },
 });
 
