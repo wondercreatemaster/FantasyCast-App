@@ -1,8 +1,8 @@
-import { Button, Icon } from "@rneui/themed";
+import { Icon } from "@rneui/themed";
 import { useState } from "react";
-import { Alert, ScrollView, StyleSheet } from "react-native";
+import { Alert, ScrollView, View } from "react-native";
 import { Text } from "react-native";
-import { DataTable, Dialog, Portal } from "react-native-paper";
+import { Button, Dialog, Portal } from "react-native-paper";
 import * as FileSystem from 'expo-file-system'
 
 const ReportLogTableRow = ({ reportlog }) => {
@@ -31,15 +31,26 @@ const ReportLogTableRow = ({ reportlog }) => {
   }
 
   return (
-    <DataTable.Row onPress={showDialog}>
-      <DataTable.Cell>
-        <Text>{reportlog.report_name}</Text>
-      </DataTable.Cell>
-      <DataTable.Cell style={styles.cell}>
-        <Text>
+    <View style={{ borderBottomWidth: 1.3, borderColor: "#2E2F3E" }}>
+      <View style={{ marginVertical: 20 }}>
+        <Text className="text-white" style={{ fontFamily: "Poppins_500Medium" }}>
+          {reportlog.report_name}
+        </Text>
+        <Text className="text-[#606074]" style={{ fontFamily: "Poppins_400Regular" }}>
           {date.getFullYear()}-{String(date.getMonth() + 1).padStart(2, '0')}-{String(date.getDate()).padStart(2, '0')} {String(date.getHours()).padStart(2, '0')}:{String(date.getMinutes()).padStart(2, '0')}
         </Text>
-      </DataTable.Cell>
+      </View>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 20 }}>
+        <Button mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }}>
+          Last Report
+        </Button>
+        <Button onPress={showDialog} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }}>
+          Text
+        </Button>
+        <Button mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }}>
+          Audio
+        </Button>
+      </View>
       <Portal>
         <Dialog visible={open} onDismiss={hideDialog} className="rounded-md bg-white">
           <Dialog.Content className="max-h-[90%]">
@@ -66,18 +77,8 @@ const ReportLogTableRow = ({ reportlog }) => {
           </Dialog.Actions>
         </Dialog>
       </Portal>
-    </DataTable.Row>
+    </View>
   )
 }
-
-const styles = StyleSheet.create({
-  cell: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: 'center',
-    justifyContent: "center"
-  }
-})
-
 
 export default ReportLogTableRow;

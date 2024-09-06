@@ -10,7 +10,7 @@ const ReportTable = ({ reports, scheduledata, league, setScheduleData }) => {
 			<ScrollView>
 				<View style={styles.list}>
 					{
-						reports != undefined && reports.map(report =>
+						report_schedule != undefined && reports.map(report =>
 							<ReportTableRow
 								key={report._id}
 								report={report}

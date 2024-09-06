@@ -135,7 +135,6 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_600SemiBold"
   },
   form: {
-    display: "flex",
     gap: 20,
     padding: 20,
     marginTop: 50

@@ -1,33 +1,47 @@
 import React from 'react';
 import { Button, DataTable } from 'react-native-paper';
-import { StyleSheet, Text } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import ReportLogTableRow from './ReportLogTableRow';
 
 const ReportLogTable = ({ reportloglist }) => {
 
   return (
-    <DataTable>
-      <DataTable.Header className="border-b-1 border-inherit gap-2">
-        <DataTable.Title style={styles.header}>Report Name</DataTable.Title>
-        <DataTable.Title style={styles.header}>Date</DataTable.Title>
-      </DataTable.Header>
-      {
-        reportloglist && reportloglist.map(reportlog =>
-          <ReportLogTableRow
-            key={reportlog._id}
-            reportlog={reportlog}
-          />
-        )
-      }
-    </DataTable>
+    <View>
+      <View style={styles.headergroup}>
+        <Text style={styles.header}>Report Name</Text>
+      </View>
+      <View style={styles.list}>
+        <ScrollView>
+          {
+            reportloglist && reportloglist.map(reportlog =>
+              <ReportLogTableRow
+                key={reportlog._id}
+                reportlog={reportlog}
+              />
+            )
+          }
+        </ScrollView>
+      </View>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  headergroup: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 20,
+    padding: 10
+  },
   header: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center"
+    color: "white",
+    fontFamily: "Poppins_400Regular"
+  },
+  list: {
+    backgroundColor: "#252536",
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    maxHeight: "83%"
   }
 });
 

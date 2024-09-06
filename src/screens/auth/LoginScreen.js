@@ -105,7 +105,9 @@ const LoginScreen = ({ navigation }) => {
                         checkedColor='#1976D2'
                         containerStyle={styles.checkbox}
                         textStyle={{ color: "white", fontFamily: "Poppins_400Regular" }}
-                        checked
+                        checked={keyboardVisible}
+                        onPress={() => setKeyboardVisible(prev => !prev)}
+                        onIconPress={() => setKeyboardVisible(prev => !prev)}
                     />
                     <Button textColor='white' labelStyle={{ fontFamily: "Poppins_400Regular" }}>Forgot Password?</Button>
                 </View>
@@ -147,7 +149,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         height: "60%",
-        bottom: -50,
+        bottom: "-30%",
         resizeMode: "contain"
     },
     title: {

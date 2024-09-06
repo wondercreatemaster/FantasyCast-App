@@ -1,8 +1,8 @@
-import { Alert, Button, ImageBackground, Text, View } from "react-native";
+import { Button } from 'react-native-paper';
+import { Alert, TextInput, Text, View, ScrollView } from "react-native";
 import { StyleSheet } from "react-native";
 import backgroundImage from '../../assets/images/bg.jpg';
 import Header from "../../components/Header";
-import { TextInput } from "react-native-paper";
 import { useEffect, useState } from "react";
 import fetchWithToken from "../../utils/fetchWithToken";
 
@@ -62,100 +62,91 @@ const ProfileScreen = ({ navigation }) => {
     }, [])
 
   return (
-    <ImageBackground source={backgroundImage} style={styles.image}>
-      <View style={styles.container}>
-        <Header />
-        <View style={styles.profileBg}>
-          <Text style={styles.title}>
-            Profile
+    <View style={styles.container}>
+      <Header title="FantasyCast Profile" back={false} />
+      <ScrollView style={styles.profileBg}>
+        <View style={{ flex: 1, gap: 20 }}>
+
+          <Text style={styles.inputcaption}>
+            Sleeper ID*
           </Text>
-          <View style={styles.paper}>
-            <TextInput
-              label="SleeperID"
-              mode="outlined"
-              disabled
-              value={userinfo.sleeperId}
-            />
-            <TextInput
-              label="Name"
-              mode="outlined"
-              disabled
-              value={userinfo.name}
-            />
-            <TextInput
-              label="Email"
-              mode="outlined"
-              disabled
-              value={userinfo.email}
-            />
-            <TextInput
-              label="Password"
-              value={password}
-              onChangeText={setPassword}
-              mode="outlined"
-              secureTextEntry
-              right={<TextInput.Icon icon="eye" />}
-            />
-            <TextInput
-              label="Confirm Password"
-              mode="outlined"
-              value={passwordconfirm}
-              onChangeText={setPasswordConfirm}
-              secureTextEntry
-              right={<TextInput.Icon icon="eye" />}
-            />
-            <Button
-              title="Submit"
-              onPress={handleSubmit} />
-            <Button
-              title="< Back"
-              color="#555555"
-              onPress={handleBack}
-            />
-          </View>
+          <TextInput
+            value={userinfo.sleeperId}
+            style={styles.input}
+          />
+          <Text style={styles.inputcaption}>
+            Name*
+          </Text>
+          <TextInput
+            value={userinfo.name}
+            style={styles.input}
+          />
+          <Text style={styles.inputcaption}>
+            Email*
+          </Text>
+          <TextInput
+            value={userinfo.email}
+            style={styles.input}
+          />
+          <Text style={styles.inputcaption}>
+            Password*
+          </Text>
+          <TextInput
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            style={styles.input}
+          />
+          <Text style={styles.inputcaption}>
+            Confirm Password*
+          </Text>
+          <TextInput
+            value={passwordconfirm}
+            onChangeText={setPasswordConfirm}
+            secureTextEntry
+            style={styles.input}
+          />
+          <Button
+            mode='contained'
+            buttonColor='#1976D2'
+            style={{ marginTop: 30, fontFamily: "Poppins_600SemiBold" }}
+            onPress={handleSubmit} >
+            Save
+          </Button>
         </View>
-      </View>
-    </ImageBackground>
+      </ScrollView>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16
+    backgroundColor: "#181928",
+    padding: 16,
+  },
+  table: {
+    padding: 15
+  },
+  input: {
+    height: 50,
+    backgroundColor: 'white',
+    borderRadius: 15,
+    paddingHorizontal: 8,
+    padding: 10,
+    color: "#606074",
+    fontFamily: "Poppins_400Regular"
+  },
+  inputcaption: {
+    color: "white",
+    marginTop: 10,
+    marginLeft: 10,
+    fontFamily: "Poppins_400Regular"
   },
   profileBg: {
-    display: "flex",
-    gap: 20,
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-    padding: 15,
-    marginTop: 30
-  },
-  title: {
-    marginTop: 20,
-    backgroundColor: 'rgb(73, 163, 241)',
-    padding: 10,
-    color: "white",
-    fontSize: 30,
-    borderRadius: 10,
-    width: "90%",
-    textAlign: "center",
-    alignSelf: "center",
-    marginTop: -40
-  },
-  image: {
     flex: 1,
-    resizeMode: 'cover',
-  },
-  image: {
-    flex: 1,
-    resizeMode: 'cover',
-  },
-  paper: {
-    backgroundColor: "white",
-    padding: 15,
-    gap: 10
-  },
-})
+    maxHeight: "100%"
+  }
+});
 
 export default ProfileScreen;
