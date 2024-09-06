@@ -117,7 +117,7 @@ const LoginScreen = ({ navigation }) => {
                 >
                     Login
                 </Button>
-                <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "baseline" }}>
+                <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "baseline", marginBottom: 15 }}>
                     <Text style={{ color: "white", fontFamily: "Poppins_400Regular" }}>Don't you have account?</Text>
                     <Button
                         onPress={() => navigation.navigate('Signup')}
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     },
     title: {
         margin: 'auto',
-        marginBottom: 10,
+        marginBottom: 30,
         color: "white",
         fontSize: 32,
         textAlign: "center",
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
         display: "flex",
         gap: 20,
         paddingHorizontal: 20,
-        paddingVertical: 20,
+        paddingTop: 50,
         maxHeight: "100%"
     },
     checkbox: {
