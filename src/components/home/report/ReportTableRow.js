@@ -125,16 +125,16 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 					<Button mode='contained' textColor='white' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }} onPress={showRunnow}>
 						Run Now
 					</Button>
-					<Button mode='contained' textColor='white' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }} onPress={showSchedule}>
+					{/* <Button mode='contained' textColor='white' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }} onPress={showSchedule}>
 						Schedule
-					</Button>
+					</Button> */}
 				</View>
 			</View>
 			<Portal>
 				<Dialog visible={runnowDlg} onDismiss={hideRunnow} className="rounded-3xl bg-white">
 					<Dialog.Title className="text-center" style={{ fontFamily: "Poppins_600SemiBold", fontSize: 20 }}>{report.name}</Dialog.Title>
 					<Dialog.Content className="gap-2 w-[100%]">
-						<Dropdown
+						{/* <Dropdown
 							className="rounded-2xl p-4 border-2 border-[#606074] text-[#606074]"
 							itemTextStyle={{ fontFamily: "Poppins_500Medium" }}
 							placeholderStyle={{ fontFamily: "Poppins_500Medium" }}
@@ -148,7 +148,7 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 						/>
 						<View>
 							<SoundPlayer />
-						</View>
+						</View> */}
 						<Dropdown
 							className="rounded-2xl p-4 border-2 border-[#606074] text-[#606074]"
 							itemTextStyle={{ fontFamily: "Poppins_500Medium" }}

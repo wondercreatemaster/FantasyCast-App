@@ -57,21 +57,19 @@ const ReportScreen = ({ navigation }) => {
 					/>
 					<Icon source="magnify" size={20} />
 				</View>
-				{
-					scheduledata != null &&
-					<ReportTable
-						reports={
-							reports
-								.filter(
-									report => report.name.toLowerCase().includes(search.toLowerCase())
-										|| report.description.toLowerCase().includes(search.toLowerCase())
-								)
-						}
-						scheduledata={scheduledata}
-						league={league}
-						setScheduleData={setScheduleData}
-					/>
-				}
+
+				<ReportTable
+					reports={
+						reports
+							.filter(
+								report => report.name.toLowerCase().includes(search.toLowerCase())
+									|| report.description.toLowerCase().includes(search.toLowerCase())
+							)
+					}
+					// scheduledata={scheduledata}
+					league={league}
+				// setScheduleData={setScheduleData}
+				/>
 			</View>
 		</View>
 	)
