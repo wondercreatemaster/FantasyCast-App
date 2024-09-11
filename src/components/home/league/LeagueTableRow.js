@@ -8,6 +8,7 @@ import fetchWithToken from '../../../utils/fetchWithToken';
 const LeagueTableRow = ({ league }) => {
     const navigation = useNavigation();
     const [visible, setVisible] = useState(false);
+    const [comment, setComment] = useState('')
 
     const [nowWeek, setNowWeek] = useState(1)
     const weeks = useMemo(() => {
@@ -21,12 +22,14 @@ const LeagueTableRow = ({ league }) => {
 
     const showDialog = () => setVisible(true);
 
-    const hideDialog = () => setVisible(false);
+    const hideDialog = () => {
+        setVisible(false);
+        setComment('')
+    }
 
     const [team, setTeam] = useState(null)
     const [week, setWeek] = useState(null)
 
-    const [comment, setComment] = useState('')
 
     const [feedback, setFeedback] = useState({});
 
