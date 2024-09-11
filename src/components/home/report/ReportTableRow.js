@@ -108,6 +108,7 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 	const [type, setType] = useState('1')
 
 	const [email, setEmail] = useState('')
+	const [emailList, setEmailList] = useState([]);
 
 	return (
 		<View style={{ borderBottomWidth: 1.3, borderColor: "#2E2F3E" }}>
@@ -169,9 +170,27 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 								onChangeText={text => setEmail(text)}
 								style={{ width: "80%", color: "#606074", fontFamily: "Poppins_500Medium" }}
 							/>
-							<IconButton icon="plus-circle" size={20} style={{ margin: -10 }} iconColor='#1976D2' />
+							<IconButton
+								icon="plus-circle"
+								size={20}
+								style={{ margin: -10 }}
+								iconColor='#1976D2'
+								onPress={() => {
+									if(email.length == 0)
+										return;
+									setEmailList([...emailList, email])
+									setEmail("");
+								}} />
 						</View>
-
+						<View style={{ flexDirection: "column" }}>
+							{
+								emailList.map(
+									email => {
+										return <Text key={email}>{email}</Text>
+									}
+								)
+							}
+						</View>
 					</Dialog.Content>
 					<Dialog.Actions style={{ justifyContent: "center" }}>
 						<Button

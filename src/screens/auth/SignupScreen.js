@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, TextInput, StyleSheet, Text, ScrollView, Keyboard, Platform, KeyboardAvoidingView } from 'react-native';
 import { Alert } from 'react-native';
 import { Button } from 'react-native-paper';
 
@@ -9,6 +9,24 @@ const SignupScreen = ({ navigation }) => {
   const [confirmpassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
+
+  useEffect(() => {
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      () => setKeyboardVisible(true)
+    );
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => setKeyboardVisible(false)
+    );
+
+    return () => {
+      keyboardDidShowListener.remove();
+      keyboardDidHideListener.remove();
+    };
+  }, []);
 
   const handleSignup = async () => {
     if (password !== confirmpassword || password.length == 0) {
@@ -38,7 +56,7 @@ const SignupScreen = ({ navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.form}>
+      <KeyboardAvoidingView style={styles.form} behavior={Platform.OS === "ios" ? "padding" : ""}>
         <Text style={styles.title}>
           Sign Up{'\n'}
           <Text style={{ fontSize: 16, color: "#999999", fontFamily: "Poppins_400Regular" }}>
@@ -105,7 +123,7 @@ const SignupScreen = ({ navigation }) => {
             Login
           </Button>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     </ScrollView>
   );
 };

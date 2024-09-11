@@ -41,10 +41,10 @@ const ReportLogTableRow = ({ reportlog }) => {
         </Text>
       </View>
       <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 20 }}>
-        <Button mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }}>
+        <Button onPress={showDialog} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }}>
           Last Report
         </Button>
-        <Button onPress={showDialog} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }}>
+        <Button onPress={handleDownloadContent} mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }}>
           Text
         </Button>
         <Button mode='contained' buttonColor='#1976D2' labelStyle={{ fontSize: 10, fontFamily: "Poppins_500Medium" }}>

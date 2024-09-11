@@ -1,5 +1,5 @@
 import { Button } from 'react-native-paper';
-import { Alert, TextInput, Text, View, ScrollView } from "react-native";
+import { Alert, TextInput, Text, View, ScrollView, KeyboardAvoidingView, Platform } from "react-native";
 import { StyleSheet } from "react-native";
 import backgroundImage from '../../assets/images/bg.jpg';
 import Header from "../../components/Header";
@@ -62,7 +62,7 @@ const ProfileScreen = ({ navigation }) => {
     }, [])
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <Header title="FantasyCast Profile" back={false} />
       <ScrollView style={styles.profileBg}>
         <View style={{ flex: 1, gap: 20 }}>
@@ -115,7 +115,7 @@ const ProfileScreen = ({ navigation }) => {
           </Button>
         </View>
       </ScrollView>
-    </View>
+    </KeyboardAvoidingView>
   )
 }
 

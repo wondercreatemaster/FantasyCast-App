@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Button, DataTable, Dialog, Divider, Portal } from 'react-native-paper';
-import { Alert, Text, TextInput, View } from 'react-native';
+import { Alert, Text, TextInput, View, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useNavigation } from '@react-navigation/native';
 import fetchWithToken from '../../../utils/fetchWithToken';
@@ -111,7 +111,7 @@ const LeagueTableRow = ({ league }) => {
     }
 
     return (
-        <View style={{ borderBottomWidth: 1.3, borderColor: "#2E2F3E" }}>
+        <KeyboardAvoidingView style={{ borderBottomWidth: 1.3, borderColor: "#2E2F3E" }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", marginVertical: 20 }}>
                 <Text className="text-center text-white" style={{ fontFamily: "Poppins_500Medium" }}>
                     {league.name}
@@ -129,7 +129,11 @@ const LeagueTableRow = ({ league }) => {
                 </Button>
             </View>
             <Portal>
-                <Dialog visible={visible} onDismiss={hideDialog} className="rounded-3xl bg-white">
+                <Dialog
+                    visible={visible}
+                    onDismiss={hideDialog}
+                    className="rounded-3xl bg-white"
+                >
                     <Dialog.Title style={{ textAlign: "center", fontFamily: "Poppins_600SemiBold" }}>Your Sideline Snippets</Dialog.Title>
                     <Dialog.Content className="gap-2">
                         <Dropdown
@@ -177,12 +181,12 @@ const LeagueTableRow = ({ league }) => {
                             style={{ paddingHorizontal: 70, paddingVertical: 5 }}
                             labelStyle={{ fontFamily: "Poppins_500Medium" }}
                         >
-                            Save
+                            Submit
                         </Button>
                     </Dialog.Actions>
                 </Dialog>
             </Portal>
-        </View>
+        </KeyboardAvoidingView>
     )
 }
 

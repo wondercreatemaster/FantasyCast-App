@@ -1,6 +1,6 @@
 // src/screens/LoginScreen.js
 import React, { useEffect, useState } from 'react';
-import { View, TextInput, StyleSheet, Image, ImageBackground, Text, Keyboard } from 'react-native';
+import { View, TextInput, StyleSheet, Image, ImageBackground, Text, Keyboard, KeyboardAvoidingView, Platform } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/authSlice';
 import backgroundImage from '../../assets/images/bg.png';
@@ -13,23 +13,25 @@ import { Button } from 'react-native-paper';
 
 
 const LoginScreen = ({ navigation }) => {
-    const [keyboardVisible, setKeyboardVisible] = useState(false);
+    // const [keyboardVisible, setKeyboardVisible] = useState(false);
 
-    useEffect(() => {
-        const keyboardDidShowListener = Keyboard.addListener(
-            'keyboardDidShow',
-            () => setKeyboardVisible(true)
-        );
-        const keyboardDidHideListener = Keyboard.addListener(
-            'keyboardDidHide',
-            () => setKeyboardVisible(false)
-        );
+    const [keepSignin, setKeepSignin] = useState(false);
 
-        return () => {
-            keyboardDidShowListener.remove();
-            keyboardDidHideListener.remove();
-        };
-    }, []);
+    // useEffect(() => {
+    //     const keyboardDidShowListener = Keyboard.addListener(
+    //         'keyboardDidShow',
+    //         () => setKeyboardVisible(true)
+    //     );
+    //     const keyboardDidHideListener = Keyboard.addListener(
+    //         'keyboardDidHide',
+    //         () => setKeyboardVisible(false)
+    //     );
+
+    //     return () => {
+    //         keyboardDidShowListener.remove();
+    //         keyboardDidHideListener.remove();
+    //     };
+    // }, []);
 
     const [sleeperId, setSleeperId] = useState('');
     const [password, setPassword] = useState('');
@@ -64,7 +66,7 @@ const LoginScreen = ({ navigation }) => {
     };
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
             <View style={{ flex: 1, height: "35%" }}>
                 <ImageBackground source={backgroundImage} style={styles.image}>
                     <LinearGradient colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0)', '#181928']} style={styles.gradient}>
@@ -105,9 +107,9 @@ const LoginScreen = ({ navigation }) => {
                         checkedColor='#1976D2'
                         containerStyle={styles.checkbox}
                         textStyle={{ color: "white", fontFamily: "Poppins_400Regular" }}
-                        checked={keyboardVisible}
-                        onPress={() => setKeyboardVisible(prev => !prev)}
-                        onIconPress={() => setKeyboardVisible(prev => !prev)}
+                        checked={keepSignin}
+                        onPress={() => setKeepSignin(prev => !prev)}
+                        onIconPress={() => setKeepSignin(prev => !prev)}
                     />
                     <Button textColor='white' labelStyle={{ fontFamily: "Poppins_400Regular" }}>Forgot Password?</Button>
                 </View>
@@ -131,7 +133,7 @@ const LoginScreen = ({ navigation }) => {
                     </Button>
                 </View>
             </View>
-        </View>
+        </KeyboardAvoidingView>
     );
 };
 

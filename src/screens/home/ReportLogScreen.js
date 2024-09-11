@@ -27,7 +27,7 @@ const ReportLogScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Header title="FantasyCast Archive" back={false} />
+      <Header title="FantasyCast Archive" />
       <View style={styles.table}>
         <View style={styles.input}>
           <TextInput
