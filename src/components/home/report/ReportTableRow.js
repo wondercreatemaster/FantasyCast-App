@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, DataTable, Dialog, Divider, IconButton, Portal } from 'react-native-paper';
-import { Alert, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Dropdown } from 'react-native-element-dropdown';
 import SoundPlayer from '../../SoundPlayer';
 import { CheckBox } from '@rneui/themed';
@@ -111,7 +111,7 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 	const [emailList, setEmailList] = useState([]);
 
 	return (
-		<View style={{ borderBottomWidth: 1.3, borderColor: "#2E2F3E" }}>
+		<KeyboardAvoidingView style={{ borderBottomWidth: 1.3, borderColor: "#2E2F3E" }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
 			<View style={styles.cell}>
 				<Text className="text-base text-white" style={{ fontFamily: "Poppins_500Medium" }}>
 					{report.description}
@@ -176,7 +176,7 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 								style={{ margin: -10 }}
 								iconColor='#1976D2'
 								onPress={() => {
-									if(email.length == 0)
+									if (email.length == 0)
 										return;
 									setEmailList([...emailList, email])
 									setEmail("");
@@ -266,7 +266,7 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 				</Dialog>
 
 			</Portal>
-		</View>
+		</KeyboardAvoidingView>
 	)
 }
 
