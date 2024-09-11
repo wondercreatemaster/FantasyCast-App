@@ -10,6 +10,8 @@ const LeagueTableRow = ({ league }) => {
     const [visible, setVisible] = useState(false);
     const [comment, setComment] = useState('')
 
+    const [team, setTeam] = useState(null)
+    const [week, setWeek] = useState(null)
     const [nowWeek, setNowWeek] = useState(1)
     const weeks = useMemo(() => {
         const save = [];
@@ -24,11 +26,10 @@ const LeagueTableRow = ({ league }) => {
 
     const hideDialog = () => {
         setVisible(false);
-        setComment('')
+        setComment('');
+        setTeam(null);
+        setWeek(null);
     }
-
-    const [team, setTeam] = useState(null)
-    const [week, setWeek] = useState(null)
 
 
     const [feedback, setFeedback] = useState({});

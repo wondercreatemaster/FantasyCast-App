@@ -199,7 +199,7 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 							style={{ paddingHorizontal: 60, paddingVertical: 5 }}
 							labelStyle={{ fontFamily: "Poppins_500Medium" }}
 						>
-							Save
+							Run Report
 						</Button>
 					</Dialog.Actions>
 				</Dialog>
