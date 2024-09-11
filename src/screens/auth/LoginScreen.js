@@ -168,6 +168,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         maxHeight: "100%",
         minHeight: "65%",
+        backgroundColor: "#181928",
         justifyContent: 'space-between'
     },
     checkbox: {

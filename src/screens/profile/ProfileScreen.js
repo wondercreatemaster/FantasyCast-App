@@ -62,8 +62,8 @@ const ProfileScreen = ({ navigation }) => {
     }, [])
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-      <Header title="FantasyCast Profile" back={false} />
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : ""}>
+      <Header title="FantasyCast Profile" />
       <ScrollView style={styles.profileBg}>
         <View style={{ flex: 1, gap: 20 }}>
 
