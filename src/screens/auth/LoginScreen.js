@@ -13,25 +13,25 @@ import { Button } from 'react-native-paper';
 
 
 const LoginScreen = ({ navigation }) => {
-    // const [keyboardVisible, setKeyboardVisible] = useState(false);
+    const [keyboardVisible, setKeyboardVisible] = useState(false);
 
     const [keepSignin, setKeepSignin] = useState(false);
 
-    // useEffect(() => {
-    //     const keyboardDidShowListener = Keyboard.addListener(
-    //         'keyboardDidShow',
-    //         () => setKeyboardVisible(true)
-    //     );
-    //     const keyboardDidHideListener = Keyboard.addListener(
-    //         'keyboardDidHide',
-    //         () => setKeyboardVisible(false)
-    //     );
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+            'keyboardDidShow',
+            () => setKeyboardVisible(true)
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+            'keyboardDidHide',
+            () => setKeyboardVisible(false)
+        );
 
-    //     return () => {
-    //         keyboardDidShowListener.remove();
-    //         keyboardDidHideListener.remove();
-    //     };
-    // }, []);
+        return () => {
+            keyboardDidShowListener.remove();
+            keyboardDidHideListener.remove();
+        };
+    }, []);
 
     const [sleeperId, setSleeperId] = useState('');
     const [password, setPassword] = useState('');
@@ -67,37 +67,41 @@ const LoginScreen = ({ navigation }) => {
 
     return (
         <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
-            <View style={{ flex: 1, height: "35%" }}>
+            <View style={{ height: "35%" }}>
                 <ImageBackground source={backgroundImage} style={styles.image}>
                     <LinearGradient colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0)', '#181928']} style={styles.gradient}>
                         <Image source={logo} style={styles.logo} />
                     </LinearGradient>
                 </ImageBackground>
             </View>
-            <View style={styles.form}>
+            <View style={{ ...styles.form, height: keyboardVisible && Platform.OS == "android" ? "100%" : 0 }}>
                 <Text style={styles.title}>
                     Login{'\n'}
                     <Text style={{ fontSize: 16, color: "#999999", fontFamily: "Poppins_400Regular" }}>
                         Access account!
                     </Text>
                 </Text>
-                <Text style={styles.inputcaption}>
-                    SleeperId
-                </Text>
-                <TextInput
-                    value={sleeperId}
-                    onChangeText={setSleeperId}
-                    style={styles.input}
-                />
-                <Text style={styles.inputcaption}>
-                    Password
-                </Text>
-                <TextInput
-                    value={password}
-                    onChangeText={setPassword}
-                    secureTextEntry
-                    style={styles.input}
-                />
+                <View>
+
+                    <Text style={styles.inputcaption}>
+                        SleeperId
+                    </Text>
+                    <TextInput
+                        value={sleeperId}
+                        onChangeText={setSleeperId}
+                        style={styles.input}
+                    />
+                    <Text style={styles.inputcaption}>
+                        Password
+                    </Text>
+                    <TextInput
+                        value={password}
+                        onChangeText={setPassword}
+                        secureTextEntry
+                        style={styles.input}
+                    />
+                </View>
+
                 <View style={styles.checkboxContainer}>
                     <CheckBox
                         iconType="material-community"
@@ -155,19 +159,16 @@ const styles = StyleSheet.create({
         resizeMode: "contain"
     },
     title: {
-        margin: 'auto',
-        marginBottom: 30,
         color: "white",
         fontSize: 32,
         textAlign: "center",
         fontFamily: "Poppins_600SemiBold"
     },
     form: {
-        display: "flex",
-        gap: 20,
         paddingHorizontal: 20,
-        paddingTop: 50,
-        maxHeight: "100%"
+        maxHeight: "100%",
+        minHeight: "65%",
+        justifyContent: 'space-between'
     },
     checkbox: {
         backgroundColor: "rgba(0,0,0,0)",
@@ -193,7 +194,7 @@ const styles = StyleSheet.create({
     inputcaption: {
         color: "white",
         marginTop: 10,
-        marginBottom: -10,
+        marginBottom: 10,
         marginLeft: 10,
         fontFamily: "Poppins_400Regular"
     },

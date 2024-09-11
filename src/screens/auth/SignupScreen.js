@@ -56,7 +56,7 @@ const SignupScreen = ({ navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <KeyboardAvoidingView style={styles.form} behavior={Platform.OS === "ios" ? "padding" : ""}>
+      <View style={{ ...styles.form, marginBottom: keyboardVisible && Platform.OS == 'ios' ? Keyboard.metrics().height : 0 }}>
         <Text style={styles.title}>
           Sign Up{'\n'}
           <Text style={{ fontSize: 16, color: "#999999", fontFamily: "Poppins_400Regular" }}>
@@ -123,7 +123,7 @@ const SignupScreen = ({ navigation }) => {
             Login
           </Button>
         </View>
-      </KeyboardAvoidingView>
+      </View>
     </ScrollView>
   );
 };

@@ -166,8 +166,8 @@ const LeagueTableRow = ({ league }) => {
                             placeholder='Feedback'
                             className="rounded-2xl p-4 border-2 border-[#606074] text-[#606074]"
                             style={{ fontFamily: "Poppins_500Medium" }}
-                            multiline
-                            numberOfLines={5}
+                            // multiline
+                            // numberOfLines={5}
                             textAlignVertical='top'
                             value={comment}
                             onChangeText={text => setComment(text)}
