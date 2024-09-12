@@ -74,7 +74,7 @@ const LoginScreen = ({ navigation }) => {
                     </LinearGradient>
                 </ImageBackground>
             </View>
-            <View style={{ ...styles.form, height: keyboardVisible && Platform.OS == "android" ? "100%" : 0 }}>
+            <View style={{ ...styles.form, height: keyboardVisible && Platform.OS == "android" ? "100%" : null }}>
                 <Text style={styles.title}>
                     Login{'\n'}
                     <Text style={{ fontSize: 16, color: "#999999", fontFamily: "Poppins_400Regular" }}>

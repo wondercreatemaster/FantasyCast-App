@@ -31,6 +31,8 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 		Array(7).fill(false)
 	)
 
+	const [isLoading, setIsLoading] = useState(false);
+
 	const handleCheckbox = (index) => {
 		let save = scheduleState;
 		save[index] = !save[index];
@@ -74,7 +76,11 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 
 	const showRunnow = () => setRunnowDlg(true);
 
-	const hideRunnow = () => setRunnowDlg(false);
+	const hideRunnow = () => {
+		setRunnowDlg(false);
+		setEmail("");
+		setEmailList([]);
+	}
 
 	const showSchedule = () => setScheduleDlg(true);
 
@@ -109,6 +115,52 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 
 	const [email, setEmail] = useState('')
 	const [emailList, setEmailList] = useState([]);
+
+	const handleRunReport = () => {
+		setIsLoading(true);
+		if (report.voice_id == "")
+			fetchWithToken(
+				"https://fantasycastcentral.com/api/user/generate/matchup/before",
+				{
+					method: "POST",
+					body: JSON.stringify({
+						league: league.league_id,
+						original: 0,
+						recipient: emailList,
+						reportId: report._id,
+						reportType: 0
+					})
+				}
+			)
+				.then(
+					async response => {
+						const data = await response.json();
+						setIsLoading(false);
+						Alert.alert(data.message);
+					}
+				)
+		else
+			fetchWithToken(
+				"https://fantasycastcentral.com/api/user/generate/rank",
+				{
+					method: "POST",
+					body: JSON.stringify({
+						league: league.league_id,
+						original: 0,
+						recipient: emailList,
+						reportId: report._id,
+						reportType: 0
+					})
+				}
+			)
+				.then(
+					async response => {
+						const data = await response.json();
+						setIsLoading(false);
+						Alert.alert(data.message);
+					}
+				)
+	}
 
 	return (
 		<KeyboardAvoidingView style={{ borderBottomWidth: 1.3, borderColor: "#2E2F3E" }} behavior={Platform.OS === "ios" ? "padding" : "height"}>
@@ -178,15 +230,26 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 								onPress={() => {
 									if (email.length == 0)
 										return;
+									if (emailList.includes(email))
+										return;
 									setEmailList([...emailList, email])
 									setEmail("");
 								}} />
 						</View>
-						<View style={{ flexDirection: "column" }}>
+						<View style={{ flexDirection: "column", padding: 10 }}>
 							{
 								emailList.map(
 									email => {
-										return <Text key={email}>{email}</Text>
+										return <View key={email} style={{ justifyContent: "space-between", alignItems: "center", flexDirection: "row" }}>
+											<Text>{email}</Text>
+											<IconButton
+												icon="trash-can"
+												size={20}
+												onPress={() => {
+													setEmailList(emailList.filter(item => item != email));
+												}}
+											/>
+										</View>
 									}
 								)
 							}
@@ -198,6 +261,9 @@ const ReportTableRow = ({ report, scheduled, league, setScheduleData }) => {
 							buttonColor='#1976D2'
 							style={{ paddingHorizontal: 60, paddingVertical: 5 }}
 							labelStyle={{ fontFamily: "Poppins_500Medium" }}
+							onPress={handleRunReport}
+							loading={isLoading}
+							disabled={isLoading}
 						>
 							Run Report
 						</Button>
